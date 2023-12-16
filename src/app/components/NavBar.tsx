@@ -16,7 +16,7 @@ const navLinks: { path: string, title: string }[] = [
         path: "#projects"
     },
     {
-        title: "Conatct",
+        title: "Contact",
         path: "#contact"
     },
 ]
