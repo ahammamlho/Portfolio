@@ -12,7 +12,6 @@ const HeroSection = () => {
                     <h1 className='text-white mb-4 text-4xl sm:text-5xl lg:text-6xl font-extrabold'>
                         <span> Hello, I'm </span>
                         <br />
-                        {/* Lhoussaine */}
                         <TypeAnimation
                             sequence={[
                                 'Lhoussaine',
