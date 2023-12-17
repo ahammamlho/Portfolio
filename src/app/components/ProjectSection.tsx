@@ -1,8 +1,8 @@
 "use client"
-import React, { useState } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import ProjectCard from './ProjectCard'
 import ProjectTags from './ProjectTags';
-
+import { animate, motion, useInView } from "framer-motion"
 type projectsDto = {
     id: number,
     title: string,
@@ -72,8 +72,17 @@ const projectsData: projectsDto[] = [
 
 const ProjectSection = () => {
     const [tag, setTag] = useState("All");
+    const ref = useRef(null);
+    const isInView = useInView(ref, { once: true });
+
+
+    const cardVariants = {
+        initial: { y: 50, opacity: 0 },
+        animate: { y: 0, opacity: 1 }
+    }
+
     return (
-        <div>
+        <section>
             <h2 className='text-center text-4xl font-bold text-white mt-4'>
                 My Projects
             </h2>
@@ -86,14 +95,18 @@ const ProjectSection = () => {
 
 
             </div>
-            <div className='grid sm:grid-cols-2 xl:grid-cols-3 gap-8 md:gap:12'>
+            <ul ref={ref} className='grid sm:grid-cols-2 xl:grid-cols-3 gap-8 md:gap:12'>
                 {projectsData.filter((elm) => elm.tag.includes(tag)).
                     map((project, index) => (
-                        <ProjectCard key={index} project={project} />
+                        <motion.li key={index}
+                            variants={cardVariants} initial="initial" animate={isInView ? "animate" : "initial"}
+                            transition={{ duration: 0.2, delay: index * 0.3 }}>
+                            <ProjectCard project={project} />
+                        </motion.li>
                     ))}
 
-            </div>
-        </div>
+            </ul>
+        </section>
     )
 }
 

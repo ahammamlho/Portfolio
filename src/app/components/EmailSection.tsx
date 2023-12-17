@@ -15,10 +15,6 @@ const EmailSection = () => {
             message: event.target.message.value
         }
         const JSONdata = JSON.stringify(data);
-        const endpoint = "/api/send"
-        console.log(data);
-        console.log(JSONdata);
-
     }
 
     return (
@@ -28,9 +24,9 @@ const EmailSection = () => {
                     Let's Connect
                 </h5>
                 <p className='text-[#ADB7BE] mb-4 max-w-md'>
-                    I'm currently looking for new opportunities, my inbox is always open.
+                    I am currently looking for new opportunities, my inbox is always open.
                     Whether you have a question or just want to say hi,
-                    I'll try my best to get back to you!
+                    I will try my best to get back to you!
                 </p>
                 <div className='socials flex gap-2'>
                     <Link href="">
