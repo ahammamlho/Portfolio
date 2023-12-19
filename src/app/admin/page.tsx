@@ -1,49 +1,29 @@
-"use client"
-import { SessionProvider } from "next-auth/react"
+import { redirect } from 'next/navigation'
 
-import { signIn, useSession } from 'next-auth/react';
+import { getServerSession } from 'next-auth';
 import AboutCertifactions from "./componenets/AboutCertifact";
 import AboutEducation from "./componenets/AboutEduca";
 import AboutMe from "./componenets/AboutMe";
 import AboutSkills from "./componenets/AboutSkills";
 import Projects from "./componenets/Projects";
 import { useEffect } from "react";
+import { authOptions } from '../api/auth/[...nextauth]/route';
 
 
 
 
-export default function Home() {
+export default async function Home() {
 
 
     // Get user session
-    const { data: session } = useSession();
+    const session = await getServerSession(authOptions);
+
     console.log("session -->", session);
-    console.log("");
 
     if (!session) {
-        return <p>You are not authorized to access this page.</p>;
+        redirect('/api/auth/signin')
+        // return <p>You are not authorized to access this page.</p>;
     }
-
-    useEffect(() => {
-        const sigin = async () => {
-            try {
-                const res = await signIn('credentials', {
-                    username: "fsd",
-                    password: "sd",
-                    redirect: true,
-                    callbackUrl: '/',
-                });
-                if (res?.error === null) {
-                    console.log('callback calld');
-                } else {
-                    console.log('callback calld');
-                }
-            } catch (error: any) {
-                console.error('Error signing in:', error);
-            }
-        }
-        sigin();
-    }, [])
 
     return (
         <div className="flex min-h-screen flex-col bg-[#121212] text-white ">

@@ -1,57 +1,60 @@
 'use client'
-import React, { useState, useTransition } from 'react'
+import React, { useEffect, useState, useTransition } from 'react'
 import Image from "next/image"
 import TabButton from './TabButton'
+import { useGlobalContext } from '../context/store'
 
-const TAB_DATA = [
-    {
-        title: 'Skills',
-        id: "skills",
-        content: (
-            <ul className='list-disc pl-2'>
-                <li>NodeJs</li>
-                <li>ExpressJs</li>
-                <li>PostgressSQL</li>
-                <li>JavaScript</li>
-                <li>ReactJs</li>
-                <li>NestJs</li>
-                <li>NextJs</li>
-            </ul>
-        )
-    },
-    {
-        title: 'Education',
-        id: "education",
-        content: (
-            <ul className='list-disc pl-2'>
-                <li>1337 School</li>
-                <li>ENSEM</li>
-                <li>CPGE</li>
-            </ul>
-        )
-    },
-    {
-        title: 'Certifactions',
-        id: "certifications",
-        content: (
-            <ul className='list-disc pl-2'>
-                <li>Fullsatck Academy of code</li>
-                <li>python</li>
-                <li>flutter</li>
-            </ul>
-        )
-    }
-]
+
 
 const AboutSection = () => {
+    const { portfolioData } = useGlobalContext();
+    const [tabData, SetTabData] = useState([
+        {
+            title: 'Skills',
+            id: "skills",
+            content: [{ title: "NextJs", url: "String" }]
+        },
+        {
+            title: 'Education',
+            id: "education",
+            content: [{ title: "NextJs", url: "String" }]
+        },
+        {
+            title: 'Certifactions',
+            id: "certifications",
+            content: [{ title: "NextJs", url: "String" }]
+        }
+    ])
     const [tab, setTab] = useState("skills")
     const [isPending, startTransition] = useTransition();
+
+
 
     const handleTabChange = (id: string) => {
         startTransition(() => {
             setTab(id);
         })
     }
+
+    useEffect(() => {
+        if (portfolioData) {
+            SetTabData((pre) => {
+                for (const el of pre) {
+                    if (el.id === "skills")
+                        el.content = portfolioData.skills
+                    if (el.id === "education")
+                        el.content = portfolioData.education
+                    if (el.id === "certifications")
+                        el.content = portfolioData.certifications
+                }
+                return pre;
+            });
+        }
+        // console.log(portfolioData);
+    }, [portfolioData])
+
+
+    if (!portfolioData) return <p>wait</p>
     return (
         <section className='text-white' id="about">
             <div className='md:grid md:grid-cols-2 gap-8  py-8 px-4 xl:gap-16 sm:py-16 sm:px-16'>
@@ -62,18 +65,22 @@ const AboutSection = () => {
                     height={500}
                 />
                 <div className='mt-4 md:mt-0'>
-                    <h2 className='text-4xl font-bold text-whit mb-4'>About me</h2>
+                    <h2 className='text-4xl font-bold text-whit mb-4'  >About me</h2>
                     <p className='text-base md:text-lg'>
-                        I am a full stack web developer with a passion for creating interactive and responsive web applications. I have experience working with JavaScript, React, Redux, Node.js, Express, PostgreSQL, Sequelize, HTML, CSS, and Git. I am a quick learner and I am always looking to expand my knowledge and skill set. I am a team player and I am excited to work with others to create amazing applications.
+                        {portfolioData.aboutme}
                     </p>
 
                     <div className='flex flex-row mt-8'>
-                        {TAB_DATA.map((elm, index) => (
+                        {tabData.map((elm, index) => (
                             <TabButton key={index} selectTap={() => handleTabChange(elm.id)} active={tab == elm.id}>{elm.title}</TabButton>
                         ))}
                     </div>
                     <div className='mt-4'>
-                        {TAB_DATA.find((t) => t.id === tab)?.content}
+                        {tabData.find((t) => t.id === tab)?.content.map((elm, index) => (
+                            <ul key={index} className='list-disc pl-2'>
+                                <li>{elm.title}</li>
+                            </ul>
+                        ))}
                     </div>
                 </div>
             </div>
