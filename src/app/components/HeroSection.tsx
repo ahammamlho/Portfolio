@@ -14,7 +14,7 @@ const HeroSection = () => {
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.5 }}
                     className='col-span-7 place place-self-center  text-left'>
-                    <h1 className='text-white mb-4 text-4xl sm:text-5xl lg:text-6xl font-extrabold'>
+                    <h1 className='text-white mb-4 text-3xl sm:text-4xl lg:text-6xl font-extrabold'>
                         <span> Hello, I am </span>
                         <br />
                         <TypeAnimation

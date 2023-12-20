@@ -50,11 +50,10 @@ const AboutSection = () => {
                 return pre;
             });
         }
-        // console.log(portfolioData);
     }, [portfolioData])
 
 
-    if (!portfolioData) return <p>wait</p>
+    if (!portfolioData) return <p className='bg-red-300'>wait</p>
     return (
         <section className='text-white' id="about">
             <div className='md:grid md:grid-cols-2 gap-8  py-8 px-4 xl:gap-16 sm:py-16 sm:px-16'>
@@ -77,8 +76,9 @@ const AboutSection = () => {
                     </div>
                     <div className='mt-4'>
                         {tabData.find((t) => t.id === tab)?.content.map((elm, index) => (
-                            <ul key={index} className='list-disc pl-2'>
-                                <li>{elm.title}</li>
+                            <ul key={index} className='list-disc pl-2 hover:underline cursor-pointer'
+                                onClick={() => { console.log(elm.url) }}>
+                                <li className=''>{elm.title}</li>
                             </ul>
                         ))}
                     </div>

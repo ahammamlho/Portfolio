@@ -4,16 +4,28 @@ import { NextResponse } from "next/server";
 
 
 export async function POST(request: any) {
-    const { aboutme, skills, education, certifications, projects } = await request.json();
-    await connectMongoDB();
-    await Portfolio.create({ aboutme, skills, education, certifications, projects });
-    return NextResponse.json({ message: "Portfolio data Created" }, { status: 201 })
+    try {
+        const { aboutme, skills, education, certifications, projects } = await request.json();
+        await connectMongoDB();
+        await Portfolio.create({ aboutme, skills, education, certifications, projects });
+        return NextResponse.json({ message: "Portfolio data Created" }, { status: 201 })
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 export async function GET() {
     await connectMongoDB();
     const data = await Portfolio.find();
     return NextResponse.json(data);
+}
+
+export async function PUT(request: any) {
+    const id = request.nextUrl.searchParams.get("id");
+    const data = await request.json();
+    await connectMongoDB();
+    await Portfolio.findByIdAndUpdate(id, data);
+    return NextResponse.json({ message: "Portfolio data updated" }, { status: 200 });
 }
 
 // export async function DELETE(request: any) {
@@ -23,13 +35,7 @@ export async function GET() {
 //     return NextResponse.json({ message: "Topic Deleted" }, { status: 200 });
 // }
 
-// export async function PUT(request: any) {
-//     const id = request.nextUrl.searchParams.get("id");
-//     const { newTitle: title, newDescription: description } = await request.json();
-//     await connectMongoDB();
-//     await AboutMe.findByIdAndUpdate(id, { title, description });
-//     return NextResponse.json({ message: "Topic updated" }, { status: 200 });
-// }
+
 
 
 

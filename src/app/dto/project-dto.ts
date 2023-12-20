@@ -1,6 +1,7 @@
 
 
 type dataPortfolioDto = {
+    _id: string;
     aboutme: string;
     skills: { title: string; url: string }[];
     education: { title: string; url: string }[];
@@ -15,3 +16,9 @@ type dataPortfolioDto = {
     createdAt: Date;
     updatedAt: Date;
 };
+
+
+type dataElmentDto = {
+    title: string;
+    url: string
+}

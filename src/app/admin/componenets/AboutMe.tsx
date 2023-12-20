@@ -1,38 +1,56 @@
 'use client'
 import Link from 'next/link'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { IoCheckmarkDoneCircle } from "react-icons/io5";
 import { IoIosAddCircle } from "react-icons/io";
 import { GiCancel } from "react-icons/gi";
+import { useGlobalContext } from '@/app/context/store';
 
 const AboutMe = () => {
 
+    const { portfolioData } = useGlobalContext();
 
-    const hadnleSubmit = async (event: any) => {
-        event.preventDefault();
-        const data = {
-            email: event.target.email.value,
-            subject: event.target.subject.value,
-            message: event.target.message.value
+    const [about, setAbout] = useState('');
+
+    useEffect(() => {
+        if (portfolioData) {
+            setAbout(portfolioData.aboutme);
         }
-        const JSONdata = JSON.stringify(data);
-    }
+    }, [portfolioData])
 
+    const updateAbout = async (id: String, txt: string) => {
+        try {
+            const res = await fetch(`http://localhost:3000/api/data?id=${id}`, {
+                method: "PUT",
+                headers: {
+                    "Content-type": "application/json",
+                },
+                body: JSON.stringify({ aboutme: txt })
+            })
+        } catch (error) {
+        }
+    }
+    if (!portfolioData || portfolioData._id === '-1') return (<div>error</div>)
     return (
         <section className='flex justify-center mt-4'>
 
             <div className='w-1/2 max-w-xl'>
-                <div className='flex flex-col' onSubmit={hadnleSubmit}>
+                <div className='flex flex-col'  >
                     <div className='mb-4 flex flex-col'>
                         <div className='flex items-center pb-2'>
                             <label htmlFor="message"
                                 className='text-white block mb-1 text-sm font-medium mr-2'
                             >About me</label>
-                            <IoCheckmarkDoneCircle size={20} className='cursor-pointer' />
+                            <IoCheckmarkDoneCircle size={20} className='cursor-pointer'
+                                onClick={() => {
+                                    updateAbout(portfolioData._id, about)
+                                }} />
                         </div>
                         <textarea
-                            name='message'
-                            id='message'
+                            value={about}
+                            onChange={(e) => { setAbout(e.target.value) }}
+                            name='aboutme'
+                            id='aboutme'
                             placeholder="Let's talk about..."
                             className='bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg
                          block p-2'
@@ -44,7 +62,7 @@ const AboutMe = () => {
             </div>
 
 
-        </section>
+        </section >
     )
 }
 

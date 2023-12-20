@@ -19,7 +19,7 @@ const PortfolioSchema = new Schema(
         timestamps: true
     }
 )
-const Portfolio = mongoose.models.Topic || mongoose.model("PortfolioData", PortfolioSchema);
+const Portfolio = mongoose.models.PortfolioData || mongoose.model("PortfolioData", PortfolioSchema);
 
 export default Portfolio;
 

@@ -3,40 +3,43 @@ import { useState } from 'react';
 import { IoIosAddCircle } from "react-icons/io";
 import { GiCancel } from "react-icons/gi";
 import ProjectCard from '@/app/components/ProjectCard';
+import { useGlobalContext } from '@/app/context/store';
+import { updateData } from '../update/update';
 
-interface projectsDto {
-    title: string,
-    description: string,
-    urlImage: string,
-    tag: string[],
-    gitUrl: string,
-    previewUrl: string,
 
-}
 
 const Projects = () => {
+
+    const { portfolioData, setPortfolioData } = useGlobalContext();
+
     const hadnleSubmit = async (event: any) => {
         event.preventDefault();
-        const data: projectsDto = {
+        const data = {
+
             title: event.target.title.value,
+            urlImg: event.target.urlImage.value,
             description: event.target.description.value,
-            urlImage: event.target.urlImage.value,
-            gitUrl: event.target.urlGitHub.value,
-            tag: tags,
-            previewUrl: ""
+            urlGithub: event.target.urlGitHub.value,
+            tags: tags,
         }
-        console.log(data.tag)
-        setProjects((prev) => {
-            if (prev) return [...prev, data]
-            else return [data]
+
+        setPortfolioData((pre) => {
+            const result = pre;
+            result.projects = [...pre.projects, data];
+            updateData(result)
+            return result;
         })
-        setOpenAlert(false)
+
+        setOpenAlert(false);
+        setTags(["All"]);
     }
-    const [projects, setProjects] = useState<projectsDto[]>();
+
     const [tags, setTags] = useState<string[]>(['All']);
     const [element, setElement] = useState<string>("");
     const [openAlert, setOpenAlert] = useState(false);
 
+
+    if (!portfolioData || portfolioData._id === '-1') return (<div>error</div>)
     return (
         <section className='flex justify-center mt-5 '>
             <div className='w-1/2 max-w-xl'>
@@ -109,10 +112,24 @@ const Projects = () => {
 
                     }
 
+
                     <div className='flex flex-wrap  gap-2 '>
-                        {projects && projects.map((project, index) =>
-                            <div key={index} className='w-full p-3 '>
-                                <ProjectCard project={project} />
+                        {portfolioData.projects.map((project, index) =>
+                            <div key={index} className='w-full p-3'>
+                                <div className='relative'>
+                                    <ProjectCard project={project} />
+                                    <div className="absolute top-2 right-2 cursor-pointer" onClick={() => {
+                                        setPortfolioData((pre) => {
+                                            const result = { ...pre };
+                                            result.projects.splice(index, 1);
+                                            updateData(result);
+                                            return result;
+                                        })
+                                    }}>
+                                        <GiCancel />
+                                    </div>
+
+                                </div>
                             </div>
                         )}
                     </div>

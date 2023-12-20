@@ -1,21 +1,20 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { IoIosAddCircle } from "react-icons/io";
 import { GiCancel } from "react-icons/gi";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogTitle from "@mui/material/DialogTitle";
+import AlertAddElment from './AlertAddElment';
+import { useGlobalContext } from '@/app/context/store';
+import { updateData } from '../update/update';
+
+
 
 const AboutSkills = () => {
+    const { portfolioData, setPortfolioData } = useGlobalContext();
 
-
-    const hadnleSubmit = async (event: any) => {
-
-    }
-    const [skills, setSkills] = useState<string[]>(["NodeJs"]);
-    const [element, setElement] = useState<string>("");
     const [openAlert, setOpenAlert] = useState(false);
+
+
+    if (!portfolioData || portfolioData._id === '-1') return (<div>error</div>)
 
     return (
         <section className='flex justify-center mt-2'>
@@ -28,16 +27,17 @@ const AboutSkills = () => {
                         <IoIosAddCircle size={20} className='cursor-pointer' onClick={() => { setOpenAlert(true) }} />
                     </div>
                     <div className='flex flex-wrap  gap-2'>
-                        {skills.map((elm, index) =>
+                        {portfolioData.skills.map((elm, index) =>
                             <div key={index} className='text-sm bg-yellow-500 px-1 py-0.5 rounded-md flex items-center gap-1  group'>
-                                <p>{elm}</p>
+                                <p>{elm.title}</p>
                                 <GiCancel size={16} className='hidden group-hover:block cursor-pointer text-red-600'
                                     onClick={() => {
-                                        setSkills((prevSkills) => {
-                                            const newSkills = [...prevSkills];
-                                            newSkills.splice(index, 1);
-                                            return newSkills;
-                                        });
+                                        setPortfolioData((pre) => {
+                                            const result = { ...pre };
+                                            result.skills.splice(index, 1);
+                                            updateData(result)
+                                            return result;
+                                        })
 
                                     }} />
                             </div>
@@ -49,46 +49,17 @@ const AboutSkills = () => {
             </div>
 
 
-            <div>
-                <Dialog
-                    open={openAlert}
-                    onClose={() => {
-                        setOpenAlert(false);
-                    }}>
-                    <DialogTitle className='px-3 pt-1'>Add Skills</DialogTitle>
-                    <DialogContent className="flex flex-col px-3">
-                        <div
-                            className="flex bg-[#f1f3f8] text-black border border-[#1f3175]
-      placeholder-gray-300 text-sm focus:border-white
-      rounded-lg  w-full p-1.5 outline-none">
-                            <input
-                                type={"text"}
-                                className="bg-[#f1f3f8] text-black placeholder-gray-300 text-sm outline-none"
-                                value={element}
-                                onChange={(e) => {
-                                    setElement(e.target.value);
-                                }}
-                            ></input>
+            <AlertAddElment
+                name="Skils"
+                myFunction={(elm: dataElmentDto) => {
+                    setPortfolioData((pre) => {
+                        const result = { ...pre };
+                        result.skills = [...pre.skills, elm];
+                        updateData(result)
+                        return result;
+                    })
 
-                        </div>
-                    </DialogContent>
-                    <DialogActions>
-                        <button
-                            onClick={async () => {
-                                if (element.trim() !== "" && !skills.includes(element.trim())) {
-                                    setSkills((prev) => [...prev, element.trim()])
-                                    setOpenAlert(false);
-                                    setElement("")
-                                }
-                            }}
-                            className="w-fit font-meduim  py-1 rounded-md   text-white bg-yellow-500
-            text-xs px-2 md:text-sm lg:text-md lg:px-4">
-                            Add
-                        </button>
-                    </DialogActions>
-                </Dialog>
-
-            </div>
+                }} openAlert={openAlert} setOpenAlert={setOpenAlert} />
 
 
         </section >
