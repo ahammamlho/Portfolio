@@ -2,7 +2,7 @@
 import React, { useState, useRef, useEffect } from 'react'
 import ProjectCard from './ProjectCard'
 import ProjectTags from './ProjectTags';
-import { animate, motion, useInView } from "framer-motion"
+import { animate, motion, useAnimation, useInView } from "framer-motion"
 import { useGlobalContext } from '../context/store';
 type projectsDto = {
     id: number,
@@ -14,6 +14,12 @@ type projectsDto = {
     // previewUrl: string,
 };
 
+
+const boxVariant = {
+    visible: { opacity: 1, scale: 2 },
+    hidden: { opacity: 0, scale: 0 },
+}
+
 const ProjectSection = () => {
 
     const { portfolioData } = useGlobalContext();
@@ -22,6 +28,8 @@ const ProjectSection = () => {
     const [allTags, setAllTags] = useState<string[]>(["All"]);
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true });
+
+
 
     useEffect(() => {
         if (portfolioData) {
@@ -44,13 +52,18 @@ const ProjectSection = () => {
     return (
         <section id="projects" >
             <h2 className='text-center text-4xl font-bold text-white mt-4'>
-                My Projects
+                My Projec
+                ts
             </h2>
-            <div className='text-white flex justify-center items-center gap-2 py-6'>
-                {allTags.map((tg, index) => (
-                    <ProjectTags key={index} name={tg} onClick={() => { setTag(tg) }} isSelected={tag === tg} />
-                ))}
-            </div>
+            <div className="flex items-center justify-center">
+                <motion.div
+
+                    className='text-white flex justify-center items-center gap-2 py-6' >
+                    {allTags.map((tg, index) => (
+                        <ProjectTags key={index} name={tg} onClick={() => { setTag(tg) }} isSelected={tag === tg} />
+                    ))}
+                </motion.div>
+            </div >
 
             <ul ref={ref} className='grid sm:grid-cols-2 xl:grid-cols-3 gap-8 md:gap:12'>
                 {portfolioData?.projects.filter((elm) => elm.tags.includes(tag)).
@@ -63,7 +76,7 @@ const ProjectSection = () => {
                     ))}
 
             </ul>
-        </section>
+        </section >
     )
 }
 

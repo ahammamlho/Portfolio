@@ -1,3 +1,4 @@
+import bcrypt from 'bcrypt';
 import { NextAuthOptions } from 'next-auth';
 import NextAuth from 'next-auth/next';
 import CredntialsProvider from 'next-auth/providers/credentials';
@@ -5,55 +6,47 @@ import CredntialsProvider from 'next-auth/providers/credentials';
 // RtfgZma5mrvgBx1a
 
 export const authOptions: NextAuthOptions = {
-    // pages: {
-    //     signIn: '/',
-    // },
-    session: { strategy: 'jwt' },
+
+    secret: process.env.NEXTAUTH_SECRET,
+    pages: { signIn: '/login' },
+    session: {
+        strategy: "jwt",
+        maxAge: 1 * 24 * 60 * 60, // 30 days = 30 * 24 * 60 * 60
+    },
     providers: [
         CredntialsProvider({
+            id: 'credentials',
             name: 'Credentials',
             credentials: {
-                email: { label: 'Email', placeholder: 'Enter Email', },
+                username: { label: 'username', placeholder: 'username', },
                 password: { label: 'Password', type: 'password' },
             },
             async authorize(credentials, req) {
-                if (!credentials || !credentials.email || !credentials.password) return null;
+                if (!credentials || !credentials.username || !credentials.password) return null;
+                if (credentials.username !== "lahammam") return null;
 
-                console.log("CredntialsProvider called");
-                const user = { id: "1", email: 'Admin' };
-                if (user) {
-                    return (user);
+                // try {
+                //     const hashedPassword = await bcrypt.hash(credentials.password, 12);
+                //     console.log(hashedPassword)
+                // } catch (error) { }
+
+                try {
+                    const passwordMatch = await bcrypt.compare(credentials.password, process.env.HASH_PASS || "");
+                    if (passwordMatch) {
+                        console.log("Login successful")
+                        const user = { id: "1", username: 'lahammam' };
+                        return user
+                    } else {
+                        console.log("Invalid credentials")
+                    }
+                } catch (error) {
+                    console.log(error)
                 }
-                return (null);
 
+                return (null);
             },
         }),
     ],
-    secret: process.env.NEXTAUTH_SECRET,
-
-    // callbacks: {
-    //     async redirect({ url, baseUrl }) {
-    //         // Allows relative callback URLs
-    //         if (url.startsWith("/")) return `${baseUrl}${url}`
-    //         // Allows callback URLs on the same origin
-    //         else if (new URL(url).origin === baseUrl) return url
-    //         return baseUrl
-    //     }
-    //     // async jwt({ token, user, session }) {
-    //     //     console.log('jwt callback', { token, user, session })
-    //     //     if (user) return { ...token, ...user };
-    //     //     return token;
-    //     // },
-    //     // async session({ session, token, user }) {
-    //     //     console.log('session callback', { token, user, session })
-    //     //     // session.user = token.user;
-    //     //     // session.backendTokens = token.backendTokens;
-    //     //     return session;
-    //     // },
-
-    // },
-
-
 };
 
 const handler = NextAuth(authOptions);

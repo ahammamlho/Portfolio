@@ -1,6 +1,3 @@
-
-
-
 export async function updateData(data: dataPortfolioDto) {
     try {
         const res = await fetch(`http://localhost:3000/api/data?id=${data._id}`, {
@@ -10,8 +7,8 @@ export async function updateData(data: dataPortfolioDto) {
             },
             body: JSON.stringify(data)
         })
-        console.log(res);
+
     } catch (error) {
-        console.log(error)
+
     }
 }

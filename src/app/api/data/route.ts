@@ -1,17 +1,21 @@
-import connectMongoDB from "@/libs/mongodb";
+import connectMongoDB from "@/app/lib/mongodb";
 import Portfolio from "@/models/aboutModel";
 import { NextResponse } from "next/server";
-
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { getServerSession } from "next-auth/next"
 
 export async function POST(request: any) {
-    try {
-        const { aboutme, skills, education, certifications, projects } = await request.json();
-        await connectMongoDB();
-        await Portfolio.create({ aboutme, skills, education, certifications, projects });
-        return NextResponse.json({ message: "Portfolio data Created" }, { status: 201 })
-    } catch (error) {
-        console.log(error);
+    const session = await getServerSession(authOptions)
+    if (session) {
+        console.log({ message: "You must be logged in." });
+        return "You must be logged in.";
     }
+
+    const { aboutme, skills, education, certifications, projects } = await request.json();
+    await connectMongoDB();
+    await Portfolio.create({ aboutme, skills, education, certifications, projects });
+    return NextResponse.json({ message: "Portfolio data Created" }, { status: 201 })
+
 }
 
 export async function GET() {
@@ -21,36 +25,15 @@ export async function GET() {
 }
 
 export async function PUT(request: any) {
+    const session = await getServerSession(authOptions)
+    if (session) {
+        console.log({ message: "You must be logged in." });
+        return "You must be logged in.";
+    }
+
     const id = request.nextUrl.searchParams.get("id");
     const data = await request.json();
     await connectMongoDB();
     await Portfolio.findByIdAndUpdate(id, data);
     return NextResponse.json({ message: "Portfolio data updated" }, { status: 200 });
 }
-
-// export async function DELETE(request: any) {
-//     const id = request.nextUrl.searchParams.get("id");
-//     await connectMongoDB();
-//     await AboutMe.findByIdAndDelete(id);
-//     return NextResponse.json({ message: "Topic Deleted" }, { status: 200 });
-// }
-
-
-
-
-
-// {
-//     "aboutMe": "I am a full stack web developer",
-//     "skills": ["NodeJs", "ExpressJs"],
-//     "education": ["1337 School"],
-//     "certifications": [{ "title": "Fullsatck Academy of code", "url": "www.google.com" }],
-//     "projects": [
-//         {
-//             "title": "React Portfolio Website",
-//             "urlImg": "https://t3.ftcdn.net/jpg/02/88/80/38/240_F_288803822_0CJ8L3gr6w6nGnUeje6pCllCX7s986xz.jpg",
-//             "urlGithub": "www.google.com",
-//             "description": "Project 1 description",
-//             "tags": ["all", "c++"]
-//         }
-//     ]
-// }

@@ -32,20 +32,21 @@ const AboutMe = () => {
     }
     if (!portfolioData || portfolioData._id === '-1') return (<div>error</div>)
     return (
-        <section className='flex justify-center mt-4'>
+        <section className='flex justify-center mt-10'>
 
             <div className='w-1/2 max-w-xl'>
                 <div className='flex flex-col'  >
                     <div className='mb-4 flex flex-col'>
+
                         <div className='flex items-center pb-2'>
-                            <label htmlFor="message"
-                                className='text-white block mb-1 text-sm font-medium mr-2'
+                            <label className='text-white block mb-1 text-sm font-medium mr-2'
                             >About me</label>
                             <IoCheckmarkDoneCircle size={20} className='cursor-pointer'
                                 onClick={() => {
                                     updateAbout(portfolioData._id, about)
                                 }} />
                         </div>
+
                         <textarea
                             value={about}
                             onChange={(e) => { setAbout(e.target.value) }}

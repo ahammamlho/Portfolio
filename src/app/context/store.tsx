@@ -1,5 +1,4 @@
 "use client";
-import axios from 'axios';
 import * as React from "react";
 import {
     Dispatch,
@@ -56,7 +55,6 @@ export const GlobalContextProvider = ({
     );
 
 
-    console.log('context called', portfolioData);
     useEffect(() => {
         const getData = async () => {
             const res = await fetch('http://localhost:3000/api/data', {
@@ -66,12 +64,7 @@ export const GlobalContextProvider = ({
                 throw new Error('Failed to fetch data')
             }
             const data: dataPortfolioDto[] = await res.json()
-            console.log(data);
             setPortfolioData(data[0])
-            // const res = await axios.get('http://localhost:3000/api/data');
-            // const data = res.data;
-            // setPortfolioData(data[0])
-            // console.log(data);
         }
         try {
             if (portfolioData._id === '-1') getData()
