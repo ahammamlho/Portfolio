@@ -8,14 +8,12 @@ import { useEffect } from "react";
 import { authOptions } from '../api/auth/[...nextauth]/route';
 import { getServerSession } from "next-auth/next"
 import NavBarAdmin from './componenets/navBar';
+import Emails from './componenets/Emails';
 
 
 
 export default async function Home() {
     const session = await getServerSession(authOptions);
-
-    console.log("session --> ", session);
-
     if (!session) {
         redirect('/login')
     }
@@ -23,11 +21,12 @@ export default async function Home() {
     return (
         <div className="flex min-h-screen flex-col bg-[#121212] text-white ">
             <NavBarAdmin />
-            <AboutMe />
+            <Emails />
+            {/* <AboutMe />
             <AboutSkills />
             <AboutEducation />
             <AboutCertifactions />
-            <Projects />
+            <Projects /> */}
         </div>
     )
 }

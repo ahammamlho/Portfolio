@@ -3,6 +3,7 @@ import React, { useState, useRef, useEffect } from 'react'
 import ProjectCard from './ProjectCard'
 import ProjectTags from './ProjectTags';
 import { animate, motion, useAnimation, useInView } from "framer-motion"
+import { BiSearchAlt2 } from "react-icons/bi";
 import { useGlobalContext } from '../context/store';
 type projectsDto = {
     id: number,
@@ -23,57 +24,56 @@ const boxVariant = {
 const ProjectSection = () => {
 
     const { portfolioData } = useGlobalContext();
-
-    const [tag, setTag] = useState("All");
-    const [allTags, setAllTags] = useState<string[]>(["All"]);
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true });
 
+    const [search, setSearch] = useState("");
+    const [showSearch, setShowSearch] = useState(false);
 
 
-    useEffect(() => {
-        if (portfolioData) {
-            setAllTags((pre) => {
-                let result: string[] = ['All'];
-                for (const project of portfolioData.projects) {
-                    for (const tg of project.tags) {
-                        if (!result.includes(tg))
-                            result.push(tg);
-                    }
-                }
-                return result;
-            })
-        }
-    }, [portfolioData]);
+
+
     const cardVariants = {
         initial: { y: 50, opacity: 0 },
         animate: { y: 0, opacity: 1 }
     }
     return (
-        <section id="projects" >
-            <h2 className='text-center text-4xl font-bold text-white mt-4'>
-                My Projec
-                ts
-            </h2>
-            <div className="flex items-center justify-center">
-                <motion.div
+        <section id="projects " >
+            <div className='flex items-center justify-center gap-2 mb-6 mt-4'>
+                <h2 className='text-center text-4xl font-bold text-white'>
+                    My Project
+                </h2>
+                <BiSearchAlt2 size={25} className="cursor-pointer  text-slate-400 hover:text-white"
+                    onClick={() => {
+                        setShowSearch((pre) => !pre)
+                        setSearch("")
+                    }} />
+            </div>
 
-                    className='text-white flex justify-center items-center gap-2 py-6' >
-                    {allTags.map((tg, index) => (
-                        <ProjectTags key={index} name={tg} onClick={() => { setTag(tg) }} isSelected={tag === tg} />
-                    ))}
-                </motion.div>
-            </div >
+            {showSearch &&
+                <div className='mb-4 flex justify-center'>
+                    <input type="text" placeholder='Search by Tool' value={search}
+                        className='bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg
+                    block p-2 outline-none'
+                        onChange={(e) => setSearch(e.target.value)}
+                    />
+                </div>
+            }
 
             <ul ref={ref} className='grid sm:grid-cols-2 xl:grid-cols-3 gap-8 md:gap:12'>
-                {portfolioData?.projects.filter((elm) => elm.tags.includes(tag)).
-                    map((project, index) => (
-                        <motion.li key={index}
-                            variants={cardVariants} initial="initial" animate={isInView ? "animate" : "initial"}
-                            transition={{ duration: 0.2, delay: index * 0.3 }}>
-                            <ProjectCard project={project} />
-                        </motion.li>
-                    ))}
+                {portfolioData?.projects.filter((elm) => {
+                    for (const tag of elm.tags) {
+                        if (tag.toLocaleLowerCase().includes(search.toLocaleLowerCase())) return true;
+                    }
+                    if (search === "") return true;
+                    return false;
+                }).map((project, index) => (
+                    <motion.li key={index}
+                        variants={cardVariants} initial="initial" animate={isInView ? "animate" : "initial"}
+                        transition={{ duration: 0.2, delay: index * 0.3 }}>
+                        <ProjectCard project={project} />
+                    </motion.li>
+                ))}
 
             </ul>
         </section >

@@ -1,9 +1,6 @@
 'use client'
-import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 import { IoCheckmarkDoneCircle } from "react-icons/io5";
-import { IoIosAddCircle } from "react-icons/io";
-import { GiCancel } from "react-icons/gi";
 import { useGlobalContext } from '@/app/context/store';
 
 const AboutMe = () => {

@@ -14,7 +14,7 @@ const HeroSection = () => {
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.5 }}
                     className='col-span-7 place place-self-center  text-left'>
-                    <h1 className='text-white mb-4 text-3xl sm:text-4xl lg:text-6xl font-extrabold'>
+                    <h1 className='text-white mb-4 text-2xl sm:text-3xl lg:text-6xl font-extrabold'>
                         <span> Hello, I am </span>
                         <br />
                         <TypeAnimation
@@ -39,9 +39,9 @@ const HeroSection = () => {
                         <button className='w-full sm:w-fit px-6 py-3 rounded-full mr-4 bg-white hover:bg-slate-200 text-black'>
                             Hire me
                         </button>
-                        <button className='w-full sm:w-fit mt-4 sm:mt-0 px-6 py-3 rounded-full bg-transparent hover:bg-slate-800 text-white border border-white'>
+                        {/* <button className='w-full sm:w-fit mt-4 sm:mt-0 px-6 py-3 rounded-full bg-transparent hover:bg-slate-800 text-white border border-white'>
                             Download CV
-                        </button>
+                        </button> */}
                     </div>
                 </motion.div>
 

@@ -9,6 +9,5 @@ export async function updateData(data: dataPortfolioDto) {
         })
 
     } catch (error) {
-
     }
 }

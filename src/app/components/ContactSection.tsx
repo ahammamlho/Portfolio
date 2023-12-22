@@ -4,7 +4,10 @@ import React from 'react'
 import Image from 'next/image'
 import LinkedinIcon from "../../../public/socials/linkedin-icon.svg"
 import GitHubIcon from "../../../public/socials/github-icon.svg"
+
+
 const EmailSection = () => {
+
 
 
     const hadnleSubmit = async (event: any) => { // React.FormEvent<HTMLFormElement>
@@ -15,6 +18,17 @@ const EmailSection = () => {
             message: event.target.message.value
         }
         const JSONdata = JSON.stringify(data);
+        try {
+            const res = await fetch(`http://localhost:3000/api/email`, {
+                method: "POST",
+                headers: {
+                    "Content-type": "application/json",
+                },
+                body: JSON.stringify(data)
+            })
+            window.location.reload()
+        } catch (error) {
+        }
     }
 
     return (
@@ -46,7 +60,7 @@ const EmailSection = () => {
                         >Your email</label>
                         <input type="email" id='email' required placeholder='name@company.com'
                             className='bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg
-                        block p-2'
+                        block p-2 outline-none'
                         />
                     </div>
 
@@ -56,7 +70,7 @@ const EmailSection = () => {
                         >Subject</label>
                         <input type="text" id='subject' required placeholder='Just saying hi!'
                             className='bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg
-                            block p-2'
+                            block p-2 outline-none'
                         />
                     </div>
 
@@ -69,7 +83,7 @@ const EmailSection = () => {
                             id='message'
                             placeholder="Let's talk about..."
                             className='bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg
-                         block p-2'
+                         block p-2 outline-none'
                         />
                     </div>
                     <div className='flex items-center justify-center'>

@@ -17,6 +17,7 @@
     "@types/jsonwebtoken": "^9.0.5",
     "axios": "^1.6.2",
     "bcrypt": "^5.1.1",
+    "emailjs": "^4.0.3",
     "framer-motion": "^10.16.16",
     "js-cookie": "^3.0.5",
     "jsonwebtoken": "^9.0.2",
