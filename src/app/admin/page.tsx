@@ -21,12 +21,12 @@ export default async function Home() {
     return (
         <div className="flex min-h-screen flex-col bg-[#121212] text-white ">
             <NavBarAdmin />
-            <Emails />
-            {/* <AboutMe />
+            {/* <Emails /> */}
+            <AboutMe />
             <AboutSkills />
             <AboutEducation />
             <AboutCertifactions />
-            <Projects /> */}
+            <Projects />
         </div>
     )
 }

@@ -1,7 +1,6 @@
 "use client"
 import React, { useState, useRef, useEffect } from 'react'
 import ProjectCard from './ProjectCard'
-import ProjectTags from './ProjectTags';
 import { animate, motion, useAnimation, useInView } from "framer-motion"
 import { BiSearchAlt2 } from "react-icons/bi";
 import { useGlobalContext } from '../context/store';

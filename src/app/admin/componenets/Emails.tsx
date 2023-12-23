@@ -20,7 +20,7 @@ const Emails = () => {
 
     useEffect(() => {
         const getData = async () => {
-            const res = await fetch('http://localhost:3000/api/email')
+            const res = await fetch(`/api/email`)
             if (!res.ok) {
                 throw new Error('Failed to fetch data')
             }

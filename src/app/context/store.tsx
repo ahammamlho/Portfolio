@@ -57,7 +57,7 @@ export const GlobalContextProvider = ({
 
     useEffect(() => {
         const getData = async () => {
-            const res = await fetch('http://localhost:3000/api/data', {
+            const res = await fetch(`/api/data`, {
                 // cache: "force-cache"
             })
             if (!res.ok) {

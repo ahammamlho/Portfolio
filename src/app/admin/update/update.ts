@@ -1,6 +1,6 @@
 export async function updateData(data: dataPortfolioDto) {
     try {
-        const res = await fetch(`http://localhost:3000/api/data?id=${data._id}`, {
+        const res = await fetch(`/api/data?id=${data._id}`, {
             method: "PUT",
             headers: {
                 "Content-type": "application/json",

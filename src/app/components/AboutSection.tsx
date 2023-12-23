@@ -3,6 +3,7 @@ import React, { useEffect, useState, useTransition } from 'react'
 import Image from "next/image"
 import TabButton from './TabButton'
 import { useGlobalContext } from '../context/store'
+import Link from 'next/link'
 
 
 
@@ -76,10 +77,11 @@ const AboutSection = () => {
                     </div>
                     <div className='mt-4'>
                         {tabData.find((t) => t.id === tab)?.content.map((elm, index) => (
-                            <ul key={index} className='list-disc pl-2 hover:underline cursor-pointer'
-                                onClick={() => { console.log(elm.url) }}>
+                            <Link href={elm.url} target="_blank">
+                            <ul key={index} className='list-disc pl-2 hover:underline cursor-pointer'>
                                 <li className=''>{elm.title}</li>
                             </ul>
+                            </Link>
                         ))}
                     </div>
                 </div>

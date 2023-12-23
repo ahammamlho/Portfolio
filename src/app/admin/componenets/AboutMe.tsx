@@ -17,7 +17,7 @@ const AboutMe = () => {
 
     const updateAbout = async (id: String, txt: string) => {
         try {
-            const res = await fetch(`http://localhost:3000/api/data?id=${id}`, {
+            const res = await fetch(`/api/data?id=${id}`, {
                 method: "PUT",
                 headers: {
                     "Content-type": "application/json",

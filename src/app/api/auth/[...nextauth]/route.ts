@@ -24,7 +24,7 @@ export const authOptions: NextAuthOptions = {
             async authorize(credentials, req) {
                 if (!credentials || !credentials.username || !credentials.password) return null;
                 if (credentials.username !== "lahammam") return null;
-
+                console.log('authorize function called ---> ')
                 // try {
                 //     const hashedPassword = await bcrypt.hash(credentials.password, 12);
                 //     console.log(hashedPassword)
@@ -33,20 +33,32 @@ export const authOptions: NextAuthOptions = {
                 try {
                     const passwordMatch = await bcrypt.compare(credentials.password, process.env.HASH_PASS || "");
                     if (passwordMatch) {
-                        console.log("Login successful")
                         const user = { id: "1", username: 'lahammam' };
+                        // console.log("Login successful", user)
                         return user
                     } else {
-                        console.log("Invalid credentials")
+                        return (null);
                     }
                 } catch (error) {
                     console.log(error)
                 }
-
                 return (null);
             },
         }),
+        
     ],
+    callbacks: {
+        async jwt({ token, user, session }: any) {
+            // console.log('jwt callback called ---> ', { token, user, session })
+            if (user) return { ...token, username: user.username };
+            return token;
+        },
+        async session({ session, token, user } : any) {
+            // console.log('session callback called --->', { session, token, user })
+            session.user = token;
+            return session;
+        },
+      },
 };
 
 const handler = NextAuth(authOptions);

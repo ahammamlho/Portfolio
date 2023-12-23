@@ -1,12 +1,9 @@
-
 "use client";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
 export default function SignInDash() {
     const router = useRouter();
-
-
     async function onSubmit(event: any) {
         event.preventDefault();
         try {
@@ -21,16 +18,19 @@ export default function SignInDash() {
             } else {
 
             }
-        } catch (error: any) { }
+        } catch (error: any) {
+            console.error("Sign-in error:", error.message);
+         }
     }
 
     return (
-        <div className="   ">
+        <div className="">
             <div className="h-full min-h-screen sm:w-[23rem] w-[20rem] flex flex-col  justify-center">
                 <p className="text-white text-center">Login into Dashboard</p>
 
-                <form className='flex flex-col mt-16 mx-6' onSubmit={onSubmit}>
-                    <div className='flex flex-col   '>
+                <form className='flex flex-col mt-16 mx-6' onSubmit={onSubmit}  >
+
+                    <div className='flex flex-col'>
                         <label htmlFor="email"
                             className='text-white block mb-1 text-sm font-medium'
                         >Username</label>
@@ -40,7 +40,8 @@ export default function SignInDash() {
                         />
                     </div>
 
-                    <div className='mt-4 flex flex-col'>
+
+                             <div className='mt-4 flex flex-col'>
                         <label htmlFor="text"
                             className='text-white block mb-1 text-sm font-medium'
                         >Password</label>
@@ -50,7 +51,7 @@ export default function SignInDash() {
                         />
                     </div>
 
-                    <div className='mt-4 flex justify-center'>
+                      <div className='mt-4 flex justify-center'>
                         <button
                             type='submit'
                             className='bg-yellow-500 hover:bg-yellow-600 
@@ -62,3 +63,7 @@ export default function SignInDash() {
         </div>
     )
 }
+
+
+
+                  

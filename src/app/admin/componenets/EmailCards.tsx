@@ -19,7 +19,7 @@ interface MyComponentProps {
 const EmailCards: React.FC<MyComponentProps> = ({ email }) => {
     const [show, setShow] = useState(false);
     const deleteItem = async (id: string) => {
-        const res = await fetch(`http://localhost:3000/api/email?id=${id}`, {
+        const res = await fetch(`/api/email?id=${id}`, {
             method: "DELETE"
         })
 

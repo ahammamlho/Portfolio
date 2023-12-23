@@ -3,6 +3,7 @@ import React from 'react'
 import Image from "next/image"
 import { TypeAnimation } from 'react-type-animation';
 import { motion } from "framer-motion"
+import Link from 'next/link';
 
 const HeroSection = () => {
     return (
@@ -15,7 +16,7 @@ const HeroSection = () => {
                     transition={{ duration: 0.5 }}
                     className='col-span-7 place place-self-center  text-left'>
                     <h1 className='text-white mb-4 text-2xl sm:text-3xl lg:text-6xl font-extrabold'>
-                        <span> Hello, I am </span>
+                        <span> Hello, I'm </span>
                         <br />
                         <TypeAnimation
                             sequence={[
@@ -23,7 +24,7 @@ const HeroSection = () => {
                                 1000,
                                 'Web developer',
                                 1000,
-                                'Backend developer',
+                                'Mobile developer',
                                 1000,
                             ]}
                             wrapper="span"
@@ -33,12 +34,14 @@ const HeroSection = () => {
                         />
                     </h1>
                     <p className='text-[#ADB7BE] text-base sm:text-lg lg:text-xl mb-6'>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore iste optio debitis
+                        Welcome to my Website where ideas come to life, one line at a time.
                     </p>
                     <div>
-                        <button className='w-full sm:w-fit px-6 py-3 rounded-full mr-4 bg-white hover:bg-slate-200 text-black'>
-                            Hire me
+                        <Link href="https://www.linkedin.com/in/ahammam-lhoussaine/" target="_blank">
+                        <button  className='w-full sm:w-fit px-6 py-3 rounded-full mr-4 bg-white hover:bg-slate-200 text-black'>
+                            Hire me   
                         </button>
+                        </Link>
                         {/* <button className='w-full sm:w-fit mt-4 sm:mt-0 px-6 py-3 rounded-full bg-transparent hover:bg-slate-800 text-white border border-white'>
                             Download CV
                         </button> */}
@@ -53,7 +56,7 @@ const HeroSection = () => {
                     <div className='rounded-full bg-[#181818] flex justify-center items-center
                         w-[250px] h-[250px] lg:w-[400px] lg:h-[400px] '>
                         <Image
-                            src="/hero-image.png"
+                            src="/me.png"
                             alt="image"
                             width={300}
                             height={300}

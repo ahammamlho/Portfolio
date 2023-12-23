@@ -6,9 +6,9 @@ import { getServerSession } from "next-auth/next"
 
 export async function POST(request: any) {
     const session = await getServerSession(authOptions)
-    if (session) {
-        console.log({ message: "You must be logged in." });
-        return "You must be logged in.";
+    if (!session) {
+        console.log({ message: "You must be logged in." },session);
+        return NextResponse.json({ message: "You must be logged in" }, { status: 401 }) 
     }
 
     const { aboutme, skills, education, certifications, projects } = await request.json();
@@ -26,7 +26,7 @@ export async function GET() {
 
 export async function PUT(request: any) {
     const session = await getServerSession(authOptions)
-    if (session) {
+    if (!session) {
         console.log({ message: "You must be logged in." });
         return "You must be logged in.";
     }
