@@ -76,11 +76,8 @@ const AboutSection = () => {
             {tabData
               .find((t) => t.id === tab)
               ?.content.map((elm, index) => (
-                <Link href={elm.url} target="_blank">
-                  <ul
-                    key={index}
-                    className="list-disc pl-2 hover:underline cursor-pointer"
-                  >
+                <Link key={index} href={elm.url} target="_blank">
+                  <ul className="list-disc pl-2 hover:underline cursor-pointer">
                     <li className="">{elm.title}</li>
                   </ul>
                 </Link>
