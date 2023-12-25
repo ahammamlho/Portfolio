@@ -7,11 +7,7 @@ import { authOptions } from '../auth/[...nextauth]/authOptions';
 export async function POST(request: any) {
   const session = await getServerSession(authOptions);
   if (!session) {
-    console.log({ message: 'You must be logged in.' }, session);
-    return NextResponse.json(
-      { message: 'You must be logged in' },
-      { status: 401 },
-    );
+    return NextResponse.json({ message: 'You must be logged in', status: 401 });
   }
 
   const { aboutme, skills, education, certifications, projects } =
@@ -39,7 +35,7 @@ export async function GET() {
 export async function PUT(request: any) {
   const session = await getServerSession(authOptions);
   if (!session) {
-    console.log({ message: 'You must be logged in.' });
+    console.log({ message: 'You must be logged in.', status: 401 });
     return 'You must be logged in.';
   }
 
