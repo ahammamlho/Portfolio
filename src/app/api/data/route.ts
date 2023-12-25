@@ -1,8 +1,8 @@
 import connectMongoDB from '@/app/lib/mongodb';
 import Portfolio from '@/models/aboutModel';
 import { NextResponse } from 'next/server';
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import { getServerSession } from 'next-auth/next';
+import { authOptions } from '../auth/[...nextauth]/authOptions';
 
 export async function POST(request: any) {
   const session = await getServerSession(authOptions);
