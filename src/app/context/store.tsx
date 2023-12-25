@@ -19,7 +19,7 @@ const GlobalContext = createContext<ContextProps>({
   portfolioData: null,
   setPortfolioData: () => {},
 });
-
+// sx
 export const GlobalContextProvider = ({
   children,
 }: {
