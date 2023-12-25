@@ -32,8 +32,7 @@ export async function GET() {
 export async function PUT(request: any) {
   const session = await getServerSession(authOptions);
   if (!session) {
-    console.log({ message: 'You must be logged in.', status: 401 });
-    return 'You must be logged in.';
+    return NextResponse.json({ message: 'You must be logged in', status: 401 });
   }
 
   const id = request.nextUrl.searchParams.get('id');
