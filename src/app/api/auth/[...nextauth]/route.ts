@@ -1,7 +1,9 @@
 import bcrypt from 'bcrypt';
 import { NextAuthOptions } from 'next-auth';
 import NextAuth from 'next-auth/next';
-import CredntialsProvider from 'next-auth/providers/credentials';
+// import CredntialsProvider from 'next-auth/providers/credentials';
+import CredentialsProvider from 'next-auth/providers/credentials';
+
 // ahammamlho96
 // RtfgZma5mrvgBx1a
 
@@ -13,7 +15,7 @@ export const authOptions: NextAuthOptions = {
     maxAge: 1 * 24 * 60 * 60, // 30 days = 30 * 24 * 60 * 60
   },
   providers: [
-    CredntialsProvider({
+    CredentialsProvider({
       id: 'credentials',
       name: 'Credentials',
       credentials: {
