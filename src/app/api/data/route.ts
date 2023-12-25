@@ -20,10 +20,7 @@ export async function POST(request: any) {
     certifications,
     projects,
   });
-  return NextResponse.json(
-    { message: 'Portfolio data Created' },
-    { status: 201 },
-  );
+  return NextResponse.json({ message: 'Portfolio data Created', status: 201 });
 }
 
 export async function GET() {
