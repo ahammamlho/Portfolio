@@ -15,16 +15,16 @@ type projectsDto = {
 
 const ProjectCard = ({ project }: { project: projectsDto }) => {
   return (
-    <div className="hover:border-[1px] rounded-xl">
+    <div className="hover:border-[1px] rounded-xl ">
       <div
-        className=" rounded-t-xl relative group bg-red-300"
+        className=" rounded-t-xl relative group h-52 md:h-72"
         // style={{
         //     background: `url(${project.urlImg})`,
         //     backgroundSize: "cover",
         // }}
       >
         <Image
-          className="h-52 md:h-72 rounded-t-xl"
+          className="h-52 md:h-72 rounded-t-xl  w-full"
           src={project.urlImg}
           width={500}
           height={500}

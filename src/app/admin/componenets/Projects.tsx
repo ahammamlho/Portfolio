@@ -27,10 +27,9 @@ const Projects = () => {
     });
 
     setOpenAlert(false);
-    setTags(['All']);
   };
 
-  const [tags, setTags] = useState<string[]>(['All']);
+  const [tags, setTags] = useState<string[]>([]);
   const [element, setElement] = useState<string>('');
   const [openAlert, setOpenAlert] = useState(false);
 
@@ -62,34 +61,34 @@ const Projects = () => {
                 id="title"
                 required
                 placeholder="Title"
-                className="bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg block p-2"
+                className="bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg block p-2 outline-none"
               />
               <input
                 type="text"
                 id="urlImage"
                 required
                 placeholder="Url Image"
-                className="bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg block p-2"
+                className="bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg block p-2 outline-none"
               />
               <input
                 type="text"
                 id="urlGitHub"
                 required
                 placeholder="Url GitHub"
-                className="bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg block p-2"
+                className="bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg block p-2 outline-none"
               />
               <textarea
                 name="description"
                 id="description"
                 placeholder="Description ..."
-                className="bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg block p-2"
+                className="bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg block p-2 outline-none"
               />
               <div className="flex items-center gap-2">
                 <input
                   type="text"
                   placeholder="add tag"
                   value={element}
-                  className="bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-md block p-0.5 pl-2 w-1/3"
+                  className="bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-md block p-0.5 pl-2 w-1/3 outline-none"
                   onChange={(e) => {
                     setElement(e.target.value);
                   }}

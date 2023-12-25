@@ -8,6 +8,7 @@ import {
   useState,
   useEffect,
 } from 'react';
+import { ThemeProvider } from 'next-themes';
 
 interface ContextProps {
   portfolioData: dataPortfolioDto | null;
@@ -68,14 +69,16 @@ export const GlobalContextProvider = ({
   }, []);
 
   return (
-    <GlobalContext.Provider
-      value={{
-        portfolioData,
-        setPortfolioData,
-      }}
-    >
-      {children}
-    </GlobalContext.Provider>
+    <ThemeProvider attribute="class">
+      <GlobalContext.Provider
+        value={{
+          portfolioData,
+          setPortfolioData,
+        }}
+      >
+        {children}
+      </GlobalContext.Provider>
+    </ThemeProvider>
   );
 };
 

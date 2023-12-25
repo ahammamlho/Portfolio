@@ -53,7 +53,7 @@ const AboutMe = () => {
               id="aboutme"
               placeholder="Let's talk about..."
               className="bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg
-                         block p-2"
+                         block p-2 outline-none"
             />
           </div>
         </div>

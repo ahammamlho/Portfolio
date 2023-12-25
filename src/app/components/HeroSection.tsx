@@ -16,7 +16,7 @@ const HeroSection = () => {
           className="col-span-7 place place-self-center  text-left order-2 sm:order-1 mr-[1rem]"
         >
           <h1 className="text-white mb-4 text-2xl sm:text-3xl lg:text-6xl font-extrabold">
-            <span> Hello, I'm </span>
+            <span> Hello, I&apos;m </span>
             <br />
             <TypeAnimation
               sequence={[
