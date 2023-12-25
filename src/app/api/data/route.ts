@@ -43,8 +43,5 @@ export async function PUT(request: any) {
   const data = await request.json();
   await connectMongoDB();
   await Portfolio.findByIdAndUpdate(id, data);
-  return NextResponse.json(
-    { message: 'Portfolio data updated' },
-    { status: 200 },
-  );
+  return NextResponse.json({ message: 'Portfolio data updated', status: 200 });
 }
