@@ -1,7 +1,7 @@
 import { redirect } from 'next/navigation';
 import SignInDash from './components/signin';
-import { authOptions } from '../api/auth/[...nextauth]/route';
 import { getServerSession } from 'next-auth/next';
+import { authOptions } from '../api/auth/[...nextauth]/authOptions';
 
 export default async function Home() {
   const session = await getServerSession(authOptions);

@@ -5,10 +5,10 @@ import AboutMe from './componenets/AboutMe';
 import AboutSkills from './componenets/AboutSkills';
 import Projects from './componenets/Projects';
 import { useEffect } from 'react';
-import { authOptions } from '../api/auth/[...nextauth]/route';
 import { getServerSession } from 'next-auth/next';
 import NavBarAdmin from './componenets/navBar';
 import Emails from './componenets/Emails';
+import { authOptions } from '../api/auth/[...nextauth]/authOptions';
 
 export default async function Home() {
   const session = await getServerSession(authOptions);
