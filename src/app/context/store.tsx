@@ -9,6 +9,8 @@ import {
   useEffect,
 } from 'react';
 import { ThemeProvider } from 'next-themes';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 interface ContextProps {
   portfolioData: dataPortfolioDto | null;
@@ -77,6 +79,7 @@ export const GlobalContextProvider = ({
         }}
       >
         {children}
+        <ToastContainer />
       </GlobalContext.Provider>
     </ThemeProvider>
   );

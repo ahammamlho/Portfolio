@@ -5,6 +5,7 @@ import NavLink from './NavLink';
 import { IoMdMenu } from 'react-icons/io';
 import { MdOutlineCancelPresentation } from 'react-icons/md';
 import MenuOverlay from './MenuOverlay';
+import Image from 'next/image';
 
 const navLinks: { path: string; title: string }[] = [
   {
@@ -27,7 +28,7 @@ const NavBar = () => {
     <nav className="fixed top-0 left-0 right-0 z-10 bg-[#121212] mr-4">
       <div className="flex flex-wrap items-center justify-between mx-auto px-4 py-1">
         <Link href="/" className="text-xl md:text-3xl text-white font-semibold">
-          LOGO
+          <Image src="/logo.png" alt="image" width={50} height={50} />
         </Link>
         <div className="mobile-menu block md:hidden text-white">
           {!navbarOpen ? (

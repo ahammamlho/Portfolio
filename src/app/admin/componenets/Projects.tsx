@@ -86,7 +86,7 @@ const Projects = () => {
               <div className="flex items-center gap-2">
                 <input
                   type="text"
-                  placeholder="add tag"
+                  placeholder="add tags"
                   value={element}
                   className="bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-md block p-0.5 pl-2 w-1/3 outline-none"
                   onChange={(e) => {
@@ -97,13 +97,14 @@ const Projects = () => {
                   size={18}
                   className="cursor-pointer"
                   onClick={() => {
-                    setTags((pre) => [...pre, element.trim()]);
-                    setElement('');
+                    if (element.trim()) {
+                      setTags((pre) => [...pre, element.trim()]);
+                      setElement('');
+                    }
                   }}
                 />
               </div>
               <div>
-                <div className="text-sm">Tags :</div>
                 <div className="flex flex-wrap  gap-2 mt-1">
                   {tags &&
                     tags.map((elm, index) => (
@@ -131,8 +132,8 @@ const Projects = () => {
               <div className="flex items-center justify-center">
                 <button
                   type="submit"
-                  className="bg-yellow-500 hover:bg-yellow-600 
-                             text-white font-medium py-1 px-3 rounded-lg"
+                  className="bg-yellow-500 hover:bg-yellow-600 w-[10rem]
+                             text-white font-medium py-1 rounded-lg"
                 >
                   Add
                 </button>
