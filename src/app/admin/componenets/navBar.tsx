@@ -24,12 +24,12 @@ const NavBarAdmin = () => {
                   : 'text-[#ADB7BE] hover:text-white '
               }`}
             >
-              Skils
+              Skills
             </Link>
 
             <Link
               href="/admin/inbox"
-              className={`block sm:text-xl rounded md:p:0 
+              className={`block sm:text-xl rounded md:p:0 ml-3
               ${
                 pathname === '/admin/inbox'
                   ? 'text-white'

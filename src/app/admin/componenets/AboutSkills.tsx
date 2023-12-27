@@ -22,7 +22,7 @@ const AboutSkills = () => {
               htmlFor="message"
               className="text-white block text-sm font-medium mr-2"
             >
-              Skils
+              Skills
             </label>
             <IoIosAddCircle
               size={20}
@@ -36,19 +36,17 @@ const AboutSkills = () => {
             {portfolioData.skills.map((elm, index) => (
               <div
                 key={index}
-                className="text-sm bg-yellow-500 px-1 py-0.5 rounded-md flex items-center gap-1  group"
+                className="text-sm bg-purple-500 px-1 py-0.5 rounded-md flex items-center gap-1  group"
               >
                 <p>{elm.title}</p>
                 <GiCancel
                   size={16}
-                  className="hidden group-hover:block cursor-pointer text-red-600"
+                  className="hidden group-hover:block cursor-pointer text-red-500"
                   onClick={() => {
-                    setPortfolioData((pre) => {
-                      const result = { ...pre };
-                      result.skills.splice(index, 1);
-                      updateData(result);
-                      return result;
-                    });
+                    const result = { ...portfolioData };
+                    result.skills.splice(index, 1);
+                    setPortfolioData(result);
+                    updateData(result);
                   }}
                 />
               </div>
@@ -58,14 +56,12 @@ const AboutSkills = () => {
       </div>
 
       <AlertAddElment
-        name="Skils"
+        name="Skills"
         myFunction={(elm: dataElmentDto) => {
-          setPortfolioData((pre) => {
-            const result = { ...pre };
-            result.skills = [...pre.skills, elm];
-            updateData(result);
-            return result;
-          });
+          const result = { ...portfolioData };
+          result.skills = [...portfolioData.skills, elm];
+          setPortfolioData(result);
+          updateData(result);
         }}
         openAlert={openAlert}
         setOpenAlert={setOpenAlert}

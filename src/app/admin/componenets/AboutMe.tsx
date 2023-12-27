@@ -1,33 +1,15 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { IoCheckmarkDoneCircle } from 'react-icons/io5';
 import { useGlobalContext } from '@/app/context/store';
-
+import { updateData } from '../update/update';
+import { ToastContainer, toast } from 'react-toastify';
 const AboutMe = () => {
-  const { portfolioData } = useGlobalContext();
+  const { portfolioData, setPortfolioData } = useGlobalContext();
 
-  const [about, setAbout] = useState('');
-
-  useEffect(() => {
-    if (portfolioData) {
-      setAbout(portfolioData.aboutme);
-    }
-  }, [portfolioData]);
-
-  const updateAbout = async (id: String, txt: string) => {
-    try {
-      const res = await fetch(`/api/data?id=${id}`, {
-        method: 'PUT',
-        headers: {
-          'Content-type': 'application/json',
-        },
-        body: JSON.stringify({ aboutme: txt }),
-      });
-    } catch (error) {}
-  };
-  if (!portfolioData || portfolioData._id === '-1') return <div>error</div>;
+  if (!portfolioData || portfolioData._id === '-1') return <div></div>;
   return (
-    <section className="flex justify-center mt-10">
+    <section className="flex justify-center mt-16">
       <div className="w-1/2 max-w-xl">
         <div className="flex flex-col">
           <div className="mb-4 flex flex-col">
@@ -39,15 +21,17 @@ const AboutMe = () => {
                 size={20}
                 className="cursor-pointer"
                 onClick={() => {
-                  updateAbout(portfolioData._id, about);
+                  updateData(portfolioData);
                 }}
               />
             </div>
 
             <textarea
-              value={about}
+              value={portfolioData.aboutme}
               onChange={(e) => {
-                setAbout(e.target.value);
+                setPortfolioData((pre) => {
+                  return { ...pre, aboutme: e.target.value };
+                });
               }}
               name="aboutme"
               id="aboutme"
@@ -58,6 +42,19 @@ const AboutMe = () => {
           </div>
         </div>
       </div>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
+      <ToastContainer />
     </section>
   );
 };

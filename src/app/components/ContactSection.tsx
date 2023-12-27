@@ -11,40 +11,48 @@ const EmailSection = () => {
     subject: '',
     message: '',
   });
-
+  const [submit, setSubmit] = useState(false);
   const hadnleSubmit = async (event: any) => {
     event.preventDefault();
-    const id = toast.loading('Please wait...');
+
     try {
-      const res = await fetch(`/api/email`, {
-        method: 'POST',
-        headers: {
-          'Content-type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
-      console.log(res);
-      if (res.ok) {
-        toast.update(id, {
-          autoClose: 2000,
-          render: 'Something good happend!',
-          type: 'success',
-          isLoading: false,
+      if (!submit) {
+        setSubmit(true);
+        const id = toast.loading('Please wait...');
+        const res = await fetch(`/api/email`, {
+          method: 'POST',
+          headers: {
+            'Content-type': 'application/json',
+          },
+          body: JSON.stringify(data),
         });
-        setData({
-          email: '',
-          subject: '',
-          message: '',
-        });
-      } else {
-        toast.update(id, {
-          autoClose: 3000,
-          render: 'Something went wrong, Please contact me in Linkedin.',
-          type: 'error',
-          isLoading: false,
-        });
+        console.log(res);
+        if (res.ok) {
+          toast.update(id, {
+            autoClose: 2000,
+            render: 'Something good happend!',
+            type: 'success',
+            isLoading: false,
+          });
+          setData({
+            email: '',
+            subject: '',
+            message: '',
+          });
+          setSubmit(false);
+        } else {
+          toast.update(id, {
+            autoClose: 3000,
+            render: 'Something went wrong, Please contact me in Linkedin.',
+            type: 'error',
+            isLoading: false,
+          });
+          setSubmit(false);
+        }
       }
-    } catch (error) {}
+    } catch (error) {
+      setSubmit(false);
+    }
   };
 
   return (

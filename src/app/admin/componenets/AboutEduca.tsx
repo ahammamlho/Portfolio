@@ -10,7 +10,7 @@ const AboutEducation = () => {
   const { portfolioData, setPortfolioData } = useGlobalContext();
   const [openAlert, setOpenAlert] = useState(false);
 
-  if (!portfolioData || portfolioData._id === '-1') return <div>error</div>;
+  if (!portfolioData || portfolioData._id === '-1') return <div></div>;
   return (
     <section className="flex justify-center mt-4">
       <div className="w-1/2 max-w-xl">
@@ -34,19 +34,17 @@ const AboutEducation = () => {
             {portfolioData.education.map((elm, index) => (
               <div
                 key={index}
-                className="text-sm bg-yellow-500 px-1 py-0.5 rounded-md flex items-center gap-1  group"
+                className="text-sm bg-purple-500 px-1 py-0.5 rounded-md flex items-center gap-1  group"
               >
                 <p>{elm.title}</p>
                 <GiCancel
                   size={16}
-                  className="hidden group-hover:block cursor-pointer text-red-600"
+                  className="hidden group-hover:block cursor-pointer text-red-500"
                   onClick={() => {
-                    setPortfolioData((pre) => {
-                      const result = { ...pre };
-                      result.education.splice(index, 1);
-                      updateData(result);
-                      return result;
-                    });
+                    const result = { ...portfolioData };
+                    result.education.splice(index, 1);
+                    setPortfolioData(result);
+                    updateData(result);
                   }}
                 />
               </div>
@@ -58,12 +56,11 @@ const AboutEducation = () => {
       <AlertAddElment
         name="Education"
         myFunction={(elm: dataElmentDto) => {
-          setPortfolioData((pre) => {
-            const result = { ...pre };
-            result.education = [...pre.education, elm];
-            updateData(result);
-            return result;
-          });
+          const result = { ...portfolioData };
+          result.education = [...portfolioData.education, elm];
+          const res = updateData(result);
+          console.log('resresresres=', res);
+          setPortfolioData(result);
         }}
         openAlert={openAlert}
         setOpenAlert={setOpenAlert}

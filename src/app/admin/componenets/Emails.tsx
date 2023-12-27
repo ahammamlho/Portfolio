@@ -18,26 +18,25 @@ const Emails = () => {
   const [emails, setEmails] = useState<emailDto[] | undefined>();
 
   useEffect(() => {
-    const getData = async () => {
-      const res = await fetch(`/api/email`);
-      if (!res.ok) {
-        throw new Error('Failed to fetch data');
-      }
-      const data: emailDto[] = await res.json();
-      setEmails(data);
-    };
     try {
+      const getData = async () => {
+        const res = await fetch(`/api/email`);
+        // console.log(res);
+        if (res.ok) {
+          // throw new Error('Failed to fetch data');
+          const data: emailDto[] = await res.json();
+          setEmails(data);
+        }
+      };
       getData();
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   }, []);
 
   return (
-    <section className="flex justify-center mt-12">
+    <section className="flex justify-center mt-16">
       <div className="w-1/2 max-w-xl">
         <div className="flex items-center justify-between pb-2">
-          <div className="text-white block text-md font-medium mr-2">
+          <div className="text-white block text-sm font-medium mr-2">
             ALL INBOXES
           </div>
           <div

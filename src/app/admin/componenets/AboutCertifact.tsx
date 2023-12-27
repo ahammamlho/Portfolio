@@ -33,7 +33,7 @@ const AboutCertifactions = () => {
             {portfolioData.certifications.map((elm, index) => (
               <div
                 key={index}
-                className="text-sm bg-yellow-500 px-1 py-0.5 rounded-md flex items-center gap-1  group"
+                className="text-sm bg-purple-500 px-1 py-0.5 rounded-md flex items-center gap-1  group"
               >
                 <p>{elm.title}</p>
                 <IoIosLink
@@ -46,14 +46,12 @@ const AboutCertifactions = () => {
 
                 <GiCancel
                   size={16}
-                  className="hidden group-hover:block cursor-pointer text-red-600"
+                  className="hidden group-hover:block cursor-pointer text-red-500"
                   onClick={() => {
-                    setPortfolioData((pre) => {
-                      const result = { ...pre };
-                      result.certifications.splice(index, 1);
-                      updateData(result);
-                      return result;
-                    });
+                    const result = { ...portfolioData };
+                    result.certifications.splice(index, 1);
+                    updateData(result);
+                    setPortfolioData(result);
                   }}
                 />
               </div>
@@ -65,12 +63,10 @@ const AboutCertifactions = () => {
       <AlertAddElment
         name="Certification"
         myFunction={(elm: dataElmentDto) => {
-          setPortfolioData((pre) => {
-            const result = pre;
-            result.certifications = [...pre.certifications, elm];
-            updateData(result);
-            return result;
-          });
+          const result = { ...portfolioData };
+          result.certifications = [...portfolioData.certifications, elm];
+          updateData(result);
+          setPortfolioData(result);
         }}
         openAlert={openAlert}
         setOpenAlert={setOpenAlert}

@@ -25,7 +25,7 @@ const Projects = () => {
       updateData(result);
       return result;
     });
-
+    setTags([]);
     setOpenAlert(false);
   };
 
@@ -110,7 +110,7 @@ const Projects = () => {
                     tags.map((elm, index) => (
                       <div
                         key={index}
-                        className="text-sm bg-yellow-500 px-1 py-0.5 rounded-md flex items-center gap-1 w-min group"
+                        className="text-sm bg-purple-500 px-1 py-0.5 rounded-md flex items-center gap-1 w-min group"
                       >
                         <p>{elm}</p>
                         <GiCancel
@@ -132,7 +132,7 @@ const Projects = () => {
               <div className="flex items-center justify-center">
                 <button
                   type="submit"
-                  className="bg-yellow-500 hover:bg-yellow-600 w-[10rem]
+                  className="bg-purple-500 hover:bg-purple-400 w-[10rem]
                              text-white font-medium py-1 rounded-lg"
                 >
                   Add
@@ -146,18 +146,19 @@ const Projects = () => {
               <div key={index} className="w-full p-3">
                 <div className="relative">
                   <ProjectCard project={project} />
-                  <div
-                    className="absolute top-2 right-2 cursor-pointer"
-                    onClick={() => {
-                      setPortfolioData((pre) => {
-                        const result = { ...pre };
+                  <div className="absolute top-2 right-2 cursor-pointer">
+                    <GiCancel
+                      size={18}
+                      onClick={() => {
+                        const result = { ...portfolioData };
                         result.projects.splice(index, 1);
                         updateData(result);
-                        return result;
-                      });
-                    }}
-                  >
-                    <GiCancel />
+                        setPortfolioData(result);
+                      }}
+
+                      // result.projects.splice(index, 1);
+                      // updateData(result);
+                    />
                   </div>
                 </div>
               </div>

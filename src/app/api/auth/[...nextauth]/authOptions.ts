@@ -20,26 +20,33 @@ export const authOptions: NextAuthOptions = {
       async authorize(credentials, req) {
         if (!credentials || !credentials.username || !credentials.password)
           return null;
-        if (credentials.username !== 'lahammam') return null;
         // try {
-        //     const hashedPassword = await bcrypt.hash(credentials.password, 12);
-        //     console.log(hashedPassword)
-        // } catch (error) { }
-
+        //   const hashedPassword = await bcrypt.hash(credentials.password, 12);
+        //   console.log(hashedPassword);
+        // } catch (error) {}
         try {
-          const passwordMatch = await bcrypt.compare(
-            credentials.password,
-            process.env.HASH_PASS || '',
-          );
-          if (passwordMatch) {
-            const user = { id: '1', username: 'lahammam' };
-            return user;
-          } else {
-            return null;
+          if (credentials.username === 'lahammam') {
+            const passwordMatch = await bcrypt.compare(
+              credentials.password,
+              process.env.HASH_PASS_ADMIN || '',
+            );
+            if (passwordMatch) {
+              const user = { id: '1', username: 'lahammam' };
+              return user;
+            }
           }
-        } catch (error) {
-          console.log(error);
-        }
+
+          if (credentials.username === 'geust') {
+            const passwordMatch = await bcrypt.compare(
+              credentials.password,
+              process.env.HASH_PASS_GEUST || '',
+            );
+            if (passwordMatch) {
+              const user = { id: '1', username: 'geust' };
+              return user;
+            }
+          }
+        } catch (error) {}
         return null;
       },
     }),

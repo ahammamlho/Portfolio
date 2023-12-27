@@ -1,10 +1,11 @@
 import connectMongoDB from '@/app/lib/mongodb';
 import { NextResponse } from 'next/server';
 import EmailData from '@/models/mailModel';
+import { getServerSession } from 'next-auth/next';
+import { authOptions } from '../auth/[...nextauth]/authOptions';
 
 export async function POST(request: any) {
   try {
-    console.log('first');
     const { email, subject, message } = await request.json();
     await connectMongoDB();
     await EmailData.create({ email, subject, message });
@@ -14,6 +15,14 @@ export async function POST(request: any) {
 
 export async function GET() {
   try {
+    const session: any = await getServerSession(authOptions);
+    if (
+      !session ||
+      (session && session.user && session.user.username !== 'lahammam')
+    ) {
+      return NextResponse.json([]);
+      //  new Error('Unauthorized');
+    }
     await connectMongoDB();
     const data = await EmailData.find();
     return NextResponse.json(data);
@@ -22,6 +31,13 @@ export async function GET() {
 
 export async function DELETE(request: any) {
   try {
+    const session: any = await getServerSession(authOptions);
+    if (
+      !session ||
+      (session && session.user && session.user.username !== 'lahammam')
+    ) {
+      return NextResponse.error;
+    }
     const id = request.nextUrl.searchParams.get('id');
     await connectMongoDB();
     await EmailData.findByIdAndDelete(id);

@@ -3,12 +3,17 @@ import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { ToastContainer, toast } from 'react-toastify';
 import Image from 'next/image';
+import { useState } from 'react';
 
 export default function SignInDash() {
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
+
   async function onSubmit(event: any) {
     event.preventDefault();
     try {
+      setLoading(true);
+
       const id = toast.loading('Please wait...');
       const res = await signIn('credentials', {
         username: event.target.username.value,
@@ -17,13 +22,14 @@ export default function SignInDash() {
         callbackUrl: '/admin',
       });
       if (res && res.ok) {
-        router.push('/admin');
         toast.update(id, {
           autoClose: 2000,
           render: 'Login successful',
           type: 'success',
           isLoading: false,
         });
+
+        router.push('/admin');
       } else {
         toast.update(id, {
           autoClose: 3000,
@@ -34,6 +40,8 @@ export default function SignInDash() {
       }
     } catch (error: any) {
       console.error('Sign-in error:', error.message);
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -47,15 +55,15 @@ export default function SignInDash() {
 
         <form className="flex flex-col mt-10 mx-6" onSubmit={onSubmit}>
           <div className="flex flex-col">
-            <label className="text-white block mb-1 text-sm font-medium">
+            <p className="text-white block mb-1 text-sm font-medium">
               Username
-            </label>
+            </p>
             <input
               type="text"
               id="username"
               required
               placeholder="login"
-              className="bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg 
+              className="bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg
                                 block p-2 outline-none"
             />
           </div>
@@ -80,10 +88,11 @@ export default function SignInDash() {
           <div className="mt-4 flex justify-center">
             <button
               type="submit"
+              disabled={loading}
               className="bg-yellow-500 hover:bg-yellow-600 
                              text-white font-medium py-1.5 px-6 rounded-lg w-full"
             >
-              Sign In
+              {loading ? 'Signing In...' : 'Sign In'}
             </button>
           </div>
         </form>
@@ -100,7 +109,6 @@ export default function SignInDash() {
         pauseOnHover
         theme="light"
       />
-      {/* Same as */}
       <ToastContainer />
     </div>
   );

@@ -38,7 +38,7 @@ const AlertAddElment: React.FC<MyComponentProps> = ({
             <input
               placeholder="Title"
               type={'text'}
-              className="bg-[#f1f3f8] text-black placeholder-gray-500 text-sm outline-none"
+              className="bg-[#f1f3f8] text-black placeholder-gray-500 text-sm outline-none md:w-[28rem] w-[20rem]"
               value={element.title}
               onChange={(e) => {
                 setElement((pre: dataElmentDto) => {
@@ -50,12 +50,12 @@ const AlertAddElment: React.FC<MyComponentProps> = ({
 
           <div
             className="flex bg-[#f1f3f8] text-black border border-[#1f3175] text-sm focus:border-white
-      rounded-lg  w-full p-1.5 outline-none"
+      rounded-lg  w-full p-1.5 outline-none "
           >
             <input
               placeholder="url"
               type={'text'}
-              className="bg-[#f1f3f8] text-black placeholder-gray-500 text-sm outline-none"
+              className="bg-[#f1f3f8] text-black placeholder-gray-500 text-sm outline-none md:w-[28rem] w-[20rem]"
               value={element.url}
               onChange={(e) => {
                 setElement((pre: dataElmentDto) => {
@@ -75,7 +75,7 @@ const AlertAddElment: React.FC<MyComponentProps> = ({
                 setOpenAlert(false);
               }
             }}
-            className="w-fit font-meduim  py-1 rounded-md   text-white bg-yellow-500
+            className=" font-meduim  py-1 rounded-md  text-white bg-purple-500  w-[8rem]
             text-xs px-2 md:text-sm lg:text-md lg:px-4"
           >
             Add
