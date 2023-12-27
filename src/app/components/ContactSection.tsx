@@ -1,20 +1,20 @@
 'use client';
 import Link from 'next/link';
-import React from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import LinkedinIcon from '../../../public/socials/linkedin-icon.svg';
 import GitHubIcon from '../../../public/socials/github-icon.svg';
-
+import { ToastContainer, toast } from 'react-toastify';
 const EmailSection = () => {
+  const [data, setData] = useState({
+    email: '',
+    subject: '',
+    message: '',
+  });
+
   const hadnleSubmit = async (event: any) => {
-    // React.FormEvent<HTMLFormElement>
     event.preventDefault();
-    const data = {
-      email: event.target.email.value,
-      subject: event.target.subject.value,
-      message: event.target.message.value,
-    };
-    const JSONdata = JSON.stringify(data);
+    const id = toast.loading('Please wait...');
     try {
       const res = await fetch(`/api/email`, {
         method: 'POST',
@@ -23,7 +23,27 @@ const EmailSection = () => {
         },
         body: JSON.stringify(data),
       });
-      window.location.reload();
+      console.log(res);
+      if (res.ok) {
+        toast.update(id, {
+          autoClose: 2000,
+          render: 'Something good happend!',
+          type: 'success',
+          isLoading: false,
+        });
+        setData({
+          email: '',
+          subject: '',
+          message: '',
+        });
+      } else {
+        toast.update(id, {
+          autoClose: 3000,
+          render: 'Something went wrong, Please contact me in Linkedin.',
+          type: 'error',
+          isLoading: false,
+        });
+      }
     } catch (error) {}
   };
 
@@ -68,6 +88,12 @@ const EmailSection = () => {
               <input
                 type="email"
                 id="email"
+                value={data.email}
+                onChange={(e) => {
+                  setData((pre) => {
+                    return { ...pre, email: e.target.value };
+                  });
+                }}
                 required
                 placeholder="name@company.com"
                 className="bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg
@@ -85,6 +111,12 @@ const EmailSection = () => {
               <input
                 type="text"
                 id="subject"
+                value={data.subject}
+                onChange={(e) => {
+                  setData((pre) => {
+                    return { ...pre, subject: e.target.value };
+                  });
+                }}
                 required
                 placeholder="Just saying hi!"
                 className="bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg
@@ -102,6 +134,12 @@ const EmailSection = () => {
               <textarea
                 name="message"
                 id="message"
+                value={data.message}
+                onChange={(e) => {
+                  setData((pre) => {
+                    return { ...pre, message: e.target.value };
+                  });
+                }}
                 placeholder="Let's talk about..."
                 className="bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg
                          block p-2 outline-none"
@@ -110,7 +148,7 @@ const EmailSection = () => {
             <div className="flex items-center justify-center">
               <button
                 type="submit"
-                className="bg-yellow-500 hover:bg-yellow-600 
+                className="bg-purple-600 hover:bg-purple-500
                              text-white font-medium py-1.5 px-6 rounded-lg"
               >
                 Send Message

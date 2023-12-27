@@ -3,22 +3,30 @@ import { NextResponse } from 'next/server';
 import EmailData from '@/models/mailModel';
 
 export async function POST(request: any) {
-  const { email, subject, message } = await request.json();
-  await connectMongoDB();
-  await EmailData.create({ email, subject, message });
-  return NextResponse.json({ message: 'email data Created', status: 201 });
+  try {
+    console.log('first');
+    const { email, subject, message } = await request.json();
+    await connectMongoDB();
+    await EmailData.create({ email, subject, message });
+    return NextResponse.json({ message: 'email data Created', status: 201 });
+  } catch (error) {}
 }
 
 export async function GET() {
-  await connectMongoDB();
-  const data = await EmailData.find();
-  return NextResponse.json(data);
+  try {
+    await connectMongoDB();
+    const data = await EmailData.find();
+    return NextResponse.json(data);
+  } catch (error) {}
 }
+
 export async function DELETE(request: any) {
-  const id = request.nextUrl.searchParams.get('id');
-  await connectMongoDB();
-  await EmailData.findByIdAndDelete(id);
-  return NextResponse.json({ message: 'delete Email', status: 201 });
+  try {
+    const id = request.nextUrl.searchParams.get('id');
+    await connectMongoDB();
+    await EmailData.findByIdAndDelete(id);
+    return NextResponse.json({ message: 'delete Email', status: 201 });
+  } catch (error) {}
 }
 
 // export async function deleteAllEmails() {

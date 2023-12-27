@@ -37,28 +37,24 @@ const ProjectSection = () => {
         <h2 className="text-center text-4xl font-bold text-white">
           My Project
         </h2>
-        <BiSearchAlt2
-          size={25}
-          className="cursor-pointer  text-slate-400 hover:text-white"
-          onClick={() => {
-            setShowSearch((pre) => !pre);
-            setSearch('');
-          }}
-        />
       </div>
 
-      {showSearch && (
-        <div className="mb-4 flex justify-center">
+      <div className="flex justify-center">
+        <div
+          className="flex bg-[#18191E] items-center justify-between
+       border border-[#33353F] placeholder-[#9CA2A9]   rounded-lg
+       sm:w-[20rem] w-[12rem] pr-2 mb-5"
+        >
           <input
             type="text"
             placeholder="Search by Tool"
             value={search}
-            className="bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg
-                    block p-2 outline-none"
+            className="outline-none text-gray-100 bg-[#18191E]  sm:w-[15rem] w-[9rem] p-1 rounded-lg text-sm"
             onChange={(e) => setSearch(e.target.value)}
           />
+          <BiSearchAlt2 size={20} />
         </div>
-      )}
+      </div>
 
       <ul
         ref={ref}
@@ -73,6 +69,7 @@ const ProjectSection = () => {
             if (search === '') return true;
             return false;
           })
+
           .map((project, index) => (
             <motion.li
               key={index}
