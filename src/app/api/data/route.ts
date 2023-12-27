@@ -41,16 +41,19 @@ export async function PUT(request: any) {
       !session ||
       (session && session.user && session.user.username !== 'lahammam')
     ) {
-      return NextResponse.error;
+      return NextResponse.json({
+        message: 'error',
+        status: 401,
+      });
+    } else {
+      const id = request.nextUrl.searchParams.get('id');
+      const data = await request.json();
+      await connectMongoDB();
+      await Portfolio.findByIdAndUpdate(id, data);
+      return NextResponse.json({
+        message: 'Portfolio data updated',
+        status: 200,
+      });
     }
-
-    const id = request.nextUrl.searchParams.get('id');
-    const data = await request.json();
-    await connectMongoDB();
-    await Portfolio.findByIdAndUpdate(id, data);
-    return NextResponse.json({
-      message: 'Portfolio data updated',
-      status: 200,
-    });
   } catch (error) {}
 }

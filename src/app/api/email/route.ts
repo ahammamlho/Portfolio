@@ -21,7 +21,6 @@ export async function GET() {
       (session && session.user && session.user.username !== 'lahammam')
     ) {
       return NextResponse.json([]);
-      //  new Error('Unauthorized');
     }
     await connectMongoDB();
     const data = await EmailData.find();
@@ -36,12 +35,13 @@ export async function DELETE(request: any) {
       !session ||
       (session && session.user && session.user.username !== 'lahammam')
     ) {
-      return NextResponse.error;
+      return NextResponse.json({ message: 'delete', status: 404 });
+    } else {
+      const id = request.nextUrl.searchParams.get('id');
+      await connectMongoDB();
+      await EmailData.findByIdAndDelete(id);
+      return NextResponse.json({ message: 'delete Email', status: 201 });
     }
-    const id = request.nextUrl.searchParams.get('id');
-    await connectMongoDB();
-    await EmailData.findByIdAndDelete(id);
-    return NextResponse.json({ message: 'delete Email', status: 201 });
   } catch (error) {}
 }
 
