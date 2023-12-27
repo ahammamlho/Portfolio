@@ -25,7 +25,6 @@ const ProjectSection = () => {
   const isInView = useInView(ref, { once: true });
 
   const [search, setSearch] = useState('');
-  const [showSearch, setShowSearch] = useState(false);
 
   const cardVariants = {
     initial: { y: 50, opacity: 0 },

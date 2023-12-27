@@ -50,7 +50,7 @@ const AboutSection = () => {
   if (!portfolioData) return <p className="bg-red-300">wait</p>;
   return (
     <section className="text-white" id="about">
-      <div className="md:grid md:grid-cols-2 gap-8  py-8 px-4 xl:gasp-16 sm:p-10 items-center">
+      <div className="md:grid md:grid-cols-2 gap-8  py-8 px-4 xl:gasp-16 sm:p-10 ">
         <Image
           src="/about.svg"
           className="hidden md:block rounded-xl"
