@@ -7,6 +7,7 @@ import { authOptions } from '../auth/[...nextauth]/authOptions';
 export async function POST(request: any) {
   try {
     const { email, subject, message } = await request.json();
+    
     await connectMongoDB();
     await EmailData.create({ email, subject, message });
     return NextResponse.json({ message: 'email data Created', status: 201 });
