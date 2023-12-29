@@ -24,7 +24,8 @@ const EmailSection = () => {
           headers: {
             'Content-type': 'application/json',
           },
-          body: JSON.stringify(data),  
+
+          body: JSON.stringify(data),
         });
         console.log(res);
         if (res.ok) {
