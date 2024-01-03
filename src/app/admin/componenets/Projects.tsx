@@ -15,7 +15,7 @@ const Projects = () => {
       title: event.target.title.value,
       urlImg: event.target.urlImage.value,
       description: event.target.description.value,
-      urlGithub: event.target.urlGitHub.value,
+      gitUrl: event.target.urlGitHub.value,
       tags: tags,
     };
 
