@@ -34,9 +34,17 @@ This project was built using these technologies.
 
 ## ScreenShot
 
-![heroSection](https://github.com/ahammamlho/Portfolio/blob/main/screenshot/heroSection.png?raw=true)
-![about](https://github.com/ahammamlho/Portfolio/blob/main/screenshot/aboutSection.png?raw=true)
-![conatct](https://github.com/ahammamlho/Portfolio/blob/main/screenshot/contactSection.png?raw=true)
-![login](https://github.com/ahammamlho/Portfolio/blob/main/screenshot/loginSection.png?raw=true)
-![admin](https://github.com/ahammamlho/Portfolio/blob/main/screenshot/adminPage.png?raw=true)
-![inbox](https://github.com/ahammamlho/Portfolio/blob/main/screenshot/inboxSection.png?raw=true)
+- Hero Section
+  ![heroSection](https://github.com/ahammamlho/Portfolio/blob/main/screenshot/heroSection.png?raw=true)
+- About Section
+  ![about](https://github.com/ahammamlho/Portfolio/blob/main/screenshot/aboutSection.png?raw=true)
+- Project Section
+  ![Project](https://github.com/ahammamlho/Portfolio/blob/main/screenshot/projectSection.png?raw=true)
+- Contact Section
+  ![conatct](https://github.com/ahammamlho/Portfolio/blob/main/screenshot/contactSection.png?raw=true)
+- Login Page
+  ![login](https://github.com/ahammamlho/Portfolio/blob/main/screenshot/loginSection.png?raw=true)
+- Admin Section
+  ![admin](https://github.com/ahammamlho/Portfolio/blob/main/screenshot/adminPage.png?raw=true)
+- Inbox Section
+  ![inbox](https://github.com/ahammamlho/Portfolio/blob/main/screenshot/inboxSection.png?raw=true)

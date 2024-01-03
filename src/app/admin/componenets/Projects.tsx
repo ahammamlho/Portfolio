@@ -15,7 +15,7 @@ const Projects = () => {
       title: event.target.title.value,
       urlImg: event.target.urlImage.value,
       description: event.target.description.value,
-      gitUrl: event.target.urlGitHub.value,
+      gitUrl: event.target.gitUrl.value,
       tags: tags,
     };
 
@@ -72,7 +72,7 @@ const Projects = () => {
               />
               <input
                 type="text"
-                id="urlGitHub"
+                id="gitUrl"
                 required
                 placeholder="Url GitHub"
                 className="bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg block p-2 outline-none"

@@ -9,7 +9,7 @@ const PortfolioSchema = new Schema(
       {
         title: String,
         urlImg: String,
-        urlGithb: String,
+        gitUrl: String,
         description: String,
         tags: [String],
       },
