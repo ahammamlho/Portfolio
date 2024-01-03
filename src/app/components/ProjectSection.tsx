@@ -10,7 +10,7 @@ type projectsDto = {
   description: string;
   urlImage: string;
   tags: string[];
-  // gitUrl: string,
+  gitUrl: string;
   // previewUrl: string,
 };
 
@@ -30,6 +30,7 @@ const ProjectSection = () => {
     initial: { y: 50, opacity: 0 },
     animate: { y: 0, opacity: 1 },
   };
+
   return (
     <section id="projects" className="pt-6">
       <div className="flex items-center justify-center gap-2 mt-6 mb-4">

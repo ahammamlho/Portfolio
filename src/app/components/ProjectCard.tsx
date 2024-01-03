@@ -9,11 +9,12 @@ type projectsDto = {
   description: string;
   urlImg: string;
   tags: string[];
-  // gitUrl: string,
+  gitUrl: string;
   // previewUrl: string,
 };
 
 const ProjectCard = ({ project }: { project: projectsDto }) => {
+  console.log('projet ---> ', project);
   return (
     <div className="hover:border-[1px] rounded-xl ">
       <div
@@ -35,7 +36,8 @@ const ProjectCard = ({ project }: { project: projectsDto }) => {
                 group-hover:flex group-hover:bg-opacity-80 transition-all duration-500 "
         >
           <Link
-            href="{project.gitUrl}"
+            href={project.gitUrl}
+            target="_blank"
             className="h-10 w-10 ml-1 border-2 relative rounded-full 
                     border-[#ADB7BE] hover:border-white flex items-center justify-center group/link"
           >

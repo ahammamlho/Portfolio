@@ -43,7 +43,7 @@ export const GlobalContextProvider = ({
         title: 'React Portfolio Website',
         urlImg:
           'https://t3.ftcdn.net/jpg/02/88/80/38/240_F_288803822_0CJ8L3gr6w6nGnUeje6pCllCX7s986xz.jpg',
-        urlGithub: 'www.google.com',
+        gitUrl: 'www.google.com',
         description: 'Project 1 description',
         tags: ['all', 'c++'],
       },

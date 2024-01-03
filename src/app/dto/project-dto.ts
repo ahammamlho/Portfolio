@@ -7,7 +7,7 @@ type dataPortfolioDto = {
   projects: {
     title: string;
     urlImg: string;
-    urlGithub: string;
+    gitUrl: string;
     description: string;
     tags: string[];
   }[];
