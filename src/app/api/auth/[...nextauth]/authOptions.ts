@@ -22,7 +22,7 @@ export const authOptions: NextAuthOptions = {
           return null;
         // try {
         //   const hashedPassword = await bcrypt.hash(credentials.password, 12);
-        //   console.log(hashedPassword);
+        //   console.log('hashedPassword=', hashedPassword);
         // } catch (error) {}
         try {
           if (credentials.username === 'lahammam') {

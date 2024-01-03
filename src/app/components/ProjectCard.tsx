@@ -14,7 +14,6 @@ type projectsDto = {
 };
 
 const ProjectCard = ({ project }: { project: projectsDto }) => {
-  console.log('projet ---> ', project);
   return (
     <div className="hover:border-[1px] rounded-xl ">
       <div
