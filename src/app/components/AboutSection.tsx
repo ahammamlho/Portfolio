@@ -52,7 +52,7 @@ const AboutSection = () => {
     <section className="text-white" id="about">
       <div className="md:grid md:grid-cols-2 gap-8  py-8 px-4 xl:gasp-16 sm:p-10 ">
         <Image
-          src="/about.svg"
+          src="/about.png"
           className="hidden md:block rounded-xl"
           alt="image"
           width={500}

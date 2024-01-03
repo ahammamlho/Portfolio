@@ -21,14 +21,14 @@ const HeroSection = () => {
             <TypeAnimation
               sequence={[
                 'Lhoussaine',
-                1000,
+                2000,
                 'Web developer',
-                1000,
+                2000,
                 'Mobile developer',
-                1000,
+                2000,
               ]}
               wrapper="span"
-              speed={50}
+              speed={19}
               style={{ fontSize: '1em', display: 'inline-block' }}
               repeat={Infinity}
             />
