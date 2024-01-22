@@ -29,7 +29,7 @@ export const GlobalContextProvider = ({
 }) => {
   const [portfolioData, setPortfolioData] = useState<dataPortfolioDto>({
     _id: '-1',
-    aboutme: 'I am a full stack web developer',
+    aboutme: 'Hello there! 👋 I\'m LHOUSSAINE, a student at 1337 School, currently honing my skills in FullStack development with a focus on JavaScript, Nest.js, Express.js, Next.js and PostgreSQL. I am always eager to learn new technologies and techniques to enhance my skills and stay up-to-date.',
     skills: [
       { title: 'NodeJs', url: 'www.google.com' },
       { title: 'ExpressJs', url: 'www.google.com' },
