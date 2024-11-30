@@ -5,9 +5,10 @@ import { FaExternalLinkAlt } from 'react-icons/fa';
 import Image from 'next/image';
 
 type projectsDto = {
+  id: number;
   title: string;
   description: string;
-  urlImg: string;
+  urlImage: string;
   tags: string[];
   gitUrl: string;
   // previewUrl: string,
@@ -25,7 +26,7 @@ const ProjectCard = ({ project }: { project: projectsDto }) => {
       >
         <Image
           className="h-52 md:h-72 rounded-t-xl  w-full"
-          src={project.urlImg}
+          src={project.urlImage}
           width={500}
           height={500}
           alt="Picture of the author"

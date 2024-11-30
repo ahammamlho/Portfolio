@@ -29,10 +29,16 @@ export const GlobalContextProvider = ({
 }) => {
   const [portfolioData, setPortfolioData] = useState<dataPortfolioDto>({
     _id: '-1',
-    aboutme: 'Hello there! 👋 I\'m LHOUSSAINE, a student at 1337 School, currently honing my skills in FullStack development with a focus on JavaScript, Nest.js, Express.js, Next.js and PostgreSQL. I am always eager to learn new technologies and techniques to enhance my skills and stay up-to-date.',
+    aboutme:
+      "Hello there! 👋 I'm LHOUSSAINE, a student at 1337 School, currently honing my skills in FullStack development with a focus on JavaScript, Nest.js, Express.js, Next.js and PostgreSQL. I am always eager to learn new technologies and techniques to enhance my skills and stay up-to-date.",
     skills: [
-      { title: 'NodeJs', url: 'www.google.com' },
-      { title: 'ExpressJs', url: 'www.google.com' },
+      { title: 'ReactJs', url: 'https://react.dev/' },
+      { title: 'NextJs', url: 'https://nextjs.org/' },
+      { title: 'NodeJs', url: 'https://nodejs.org/en' },
+      { title: 'NestJs', url: 'https://nestjs.com/' },
+      { title: 'PostgresQL', url: 'https://www.postgresql.org/' },
+      { title: 'Prisma ORM', url: 'https://www.prisma.io/' },
+      { title: 'Flutter', url: 'https://flutter.dev/' },
     ],
     education: [{ title: '1337 School', url: 'www.google.com' }],
     certifications: [
@@ -52,23 +58,23 @@ export const GlobalContextProvider = ({
     updatedAt: new Date(),
   });
 
-  useEffect(() => {
-    const getData = async () => {
-      const res = await fetch(`/api/data`, {
-        // cache: "force-cache"
-      });
-      if (!res.ok) {
-        throw new Error('Failed to fetch data');
-      }
-      const data: dataPortfolioDto[] = await res.json();
-      setPortfolioData(data[0]);
-    };
-    try {
-      if (portfolioData._id === '-1') getData();
-    } catch (error) {
-      console.log(error);
-    }
-  }, []);
+  // useEffect(() => {
+  //   const getData = async () => {
+  //     const res = await fetch(`/api/data`, {
+  //       // cache: "force-cache"
+  //     });
+  //     if (!res.ok) {
+  //       throw new Error('Failed to fetch data');
+  //     }
+  //     const data: dataPortfolioDto[] = await res.json();
+  //     setPortfolioData(data[0]);
+  //   };
+  //   try {
+  //     if (portfolioData._id === '-1') getData();
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }, []);
 
   return (
     <ThemeProvider attribute="class">

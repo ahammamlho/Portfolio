@@ -11,7 +11,6 @@ type projectsDto = {
   urlImage: string;
   tags: string[];
   gitUrl: string;
-  // previewUrl: string,
 };
 
 const boxVariant = {
@@ -23,6 +22,39 @@ const ProjectSection = () => {
   const { portfolioData } = useGlobalContext();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
+
+  const projects: projectsDto[] = [
+    {
+      id: 1,
+      title: 'React Portfolio Website',
+      urlImage:
+        'https://t3.ftcdn.net/jpg/02/88/80/38/240_F_288803822_0CJ8L3gr6w6nGnUeje6pCllCX7s986xz.jpg',
+      gitUrl: 'https://github.com/ahammamlho/Portfolio',
+      description:
+        'A dynamic portfolio showcasing my skills, projects, and experiences, providing a comprehensive overview of my expertise in web development, design, and innovation.',
+      tags: ['NextJs', 'TypeScript', 'TailwindCss'],
+    },
+    {
+      id: 2,
+      title: 'ft_Transcendence',
+      urlImage:
+        'https://drive.google.com/uc?export=download&id=11iO_irL_p-w2_7sCdqa-RtKNGccKKq43',
+      gitUrl: 'https://github.com/ahammamlho/ft_transcendence',
+      description:
+        "A Single Page App where authenticated users engage in real-time 'Pong' competitions, with the added capabilities of chatting, joining channels, and much more.",
+      tags: [
+        'NestJs',
+        'NextJs',
+        'TypeScript',
+        'JWT',
+        'Passport',
+        'Socket.io',
+        'PostgreSql',
+        'Prisma',
+        'Docker',
+      ],
+    },
+  ];
 
   const [search, setSearch] = useState('');
 
@@ -60,7 +92,7 @@ const ProjectSection = () => {
         ref={ref}
         className="grid sm:grid-cols-2 xl:grid-cols-3 gap-8 md:gap:12"
       >
-        {portfolioData?.projects
+        {projects
           .filter((elm) => {
             for (const tag of elm.tags) {
               if (tag.toLocaleLowerCase().includes(search.toLocaleLowerCase()))

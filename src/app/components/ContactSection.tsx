@@ -19,16 +19,7 @@ const EmailSection = () => {
       if (!submit) {
         setSubmit(true);
         const id = toast.loading('Please wait...');
-        const res = await fetch(`/api/email`, {
-          method: 'POST',
-          headers: {
-            'Content-type': 'application/json',
-          },
-
-          body: JSON.stringify(data),
-        });
-        console.log(res);
-        if (res.ok) {
+        if (true) {
           toast.update(id, {
             autoClose: 2000,
             render: 'Something good happend!',
