@@ -6,6 +6,24 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 
 const HeroSection = () => {
+  function downloadPdf(url: string, filename = 'ahammam_cv.pdf') {
+    fetch(
+      'https://drive.google.com/uc?export=download&id=17OQnP8pPFSvW6AqS3DzMpvqea3POBfJH',
+      { mode: 'no-cors' },
+    )
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.blob();
+      })
+      .then((blob) => {
+        // Handle the blob (e.g., render it in the UI)
+      })
+      .catch((error) => {
+        console.error('Error fetching file:', error);
+      });
+  }
   return (
     <section>
       <div className="grid grid-cols-1 sm:grid-cols-12">
@@ -45,9 +63,17 @@ const HeroSection = () => {
                 Hire me
               </button>
             </Link>
-            {/* <button className='w-full sm:w-fit mt-4 sm:mt-0 px-6 py-3 rounded-full bg-transparent hover:bg-slate-800 text-white border border-white'>
-                            Download CV
-                        </button> */}
+            <button
+              className="w-full sm:w-fit mt-4 sm:mt-0 px-6 py-3 rounded-full bg-transparent hover:bg-slate-800 text-white border border-white"
+              onClick={() => {
+                const pdfUrl =
+                  'https://drive.google.com/uc?export=download&id=17OQnP8pPFSvW6AqS3DzMpvqea3POBfJH'; // Replace with your PDF URL
+                const filename = 'cv.pdf'; // Name for the downloaded file
+                downloadPdf(pdfUrl, filename);
+              }}
+            >
+              Download CV
+            </button>
           </div>
         </motion.div>
 
@@ -59,9 +85,9 @@ const HeroSection = () => {
         >
           <div
             className="rounded-full bg-[#181818] flex justify-center items-center
-                        w-[250px] h-[250px] lg:w-[400px] lg:h-[400px] "
+                        w-[250px] h-[250px] lg:w-[450px] lg:h-[450px] "
           >
-            <Image src="/me.png" alt="image" width={300} height={300} />
+            <Image src="/me2.png" alt="image" width={300} height={300} />
           </div>
         </motion.div>
       </div>
