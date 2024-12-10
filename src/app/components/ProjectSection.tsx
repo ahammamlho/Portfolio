@@ -54,6 +54,17 @@ const ProjectSection = () => {
         'Docker',
       ],
     },
+    {
+      id: 3,
+      title: 'Text To speech: Book Converter',
+      urlImage:
+        'https://drive.google.com/uc?export=download&id=1LCm2_XuNJsf8laahoV5dK1_imCiHqn84',
+      gitUrl:
+        'https://apps.apple.com/fr/app/text-to-speech-book-converter/id6470936253?platform=iphone',
+      description:
+        'A Flutter-powered app integrating ElevenLabs API to convert books into high-quality audio, enabling users to share, listen, rate, and like their favorite reads effortlessly., allowing users to share, listen, rate, and like their favorite reads, creating an engaging audiobook community.',
+      tags: ['Dart', 'Flutter', 'Supabase', 'Api', 'Authentication'],
+    },
   ];
 
   const [search, setSearch] = useState('');

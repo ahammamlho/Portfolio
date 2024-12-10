@@ -16,7 +16,7 @@ type projectsDto = {
 
 const ProjectCard = ({ project }: { project: projectsDto }) => {
   return (
-    <div className="hover:border-[1px] rounded-xl ">
+    <div className="hover:border-[1px] hover:border-white border-[1px] border-black rounded-xl ">
       <div
         className=" rounded-t-xl relative group h-52 md:h-72"
         // style={{
