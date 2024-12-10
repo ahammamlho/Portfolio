@@ -62,7 +62,7 @@ const ProjectSection = () => {
       gitUrl:
         'https://apps.apple.com/fr/app/text-to-speech-book-converter/id6470936253?platform=iphone',
       description:
-        'A Flutter-powered app integrating ElevenLabs API to convert books into high-quality audio, enabling users to share, listen, rate, and like their favorite reads effortlessly., allowing users to share, listen, rate, and like their favorite reads, creating an engaging audiobook community.',
+        'A Flutter-powered app integrating ElevenLabs API to convert books into high-quality audio, allowing users to share, listen, rate, and like their favorite reads, fostering an engaging audiobook community.',
       tags: ['Dart', 'Flutter', 'Supabase', 'Api', 'Authentication'],
     },
   ];
